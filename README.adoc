@@ -1,0 +1,40 @@
+= Jekyll Asciidoc Quickstart
+
+TODO
+
+== Deploy site to GitHub Pages
+
+GitHub doesn’t (yet) whitelist the AsciiDoc plugin, so you can only run it on your own machine… or use a continuous integration platform like https://travis-ci.org/[Travis CI].
+
+You need two branches in your repository:
+
+* **master** for markup sources and configuration (may be named differently),
+* **gh-pages** for generated static content (will be created automatically for you).
+
+The goal is to configure Travis CI job to listen for commits on the _master_ branch, automatically run jekyll build and push the generated content to the _gh-pages_ branch.
+
+. Install travis gem:
++
+  $ gem install travis
++
+. Enable Travis CI for your Jekyll repository:
+.. open your https://travis-ci.org/profile/[profile page] on Travis,
+.. find the repository and turn on the switch,
+.. then click on repository settings (next to the switch) and enable “Build only if .travis.yml is present.”
+. Generate a new personal access token on GitHub:
+.. open https://github.com/settings/tokens/new[this page] to generate a new personal access token,
+.. select the scope _public_repo_, fill some description and confirm.
+. Encrypt the token and add it to your `.travis.yml`:
+.. replace `<token>` with the GitHub token and execute:
++
+  $ travis encrypt GH_TOKEN=<token> --add env.global
++
+.. and check that it added something like the following to `.travis.yml`:
++
+[source, yaml]
+----
+env:
+  global:
+    secure: YOUR-ENCRYPTED-TOKEN
+----
+. Commit changes, push to GitHub and check that Travis has started the job and finished it successfully.
