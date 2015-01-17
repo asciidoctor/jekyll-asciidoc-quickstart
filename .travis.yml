@@ -1,0 +1,7 @@
+language: ruby
+env:
+  global:
+    - secure: <REPLACE WITH GITHUB TOKEN>
+    - POST_BUILD=true
+script:
+    - ./build.sh
