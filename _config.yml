@@ -3,9 +3,6 @@
 title: "Jekyll-asciidoc-quickstart"
 pygments: true
 
-gems:
-  - jekyll-asciidoc
-
 asciidoctor:
   attributes:
     - idseparator=_
