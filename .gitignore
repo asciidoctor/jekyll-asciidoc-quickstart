@@ -1,2 +1,6 @@
 *~
-_site/*
+/_site/
+/.bundle/
+/tmp/
+*.bundle
+Gemfile.lock
