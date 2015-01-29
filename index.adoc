@@ -6,39 +6,39 @@ documentationExpanded: false
 postsExpanded: false
 ---
 
-== Deploy site to GitHub Pages
+= Congratulations!
 
-GitHub doesn’t (yet) whitelist the AsciiDoc plugin, so you can only run it on your own machine… or use a continuous integration platform like https://travis-ci.org/[Travis CI].
+You've successfully set up and deployed an Jekyll website powered by Asciidoc using the https://github.com/asciidoctor/jekyll-asciidoc-quickstart[*Asciidoc-Jekyll-Quickstart*] project.  If everything is in order then changes to the Asciidoc content will be automatically published to your `gh_pages` branch and hosted via Jekyll and Github.
 
-You need two branches in your repository:
+== What do I do now?
 
-* **master** for markup sources and configuration (may be named differently),
-* **gh-pages** for generated static content (will be created automatically for you).
+Now that you've set up your website to run with Asciidoc you have a ton of options available to you.
 
-The goal is to configure Travis CI job to listen for commits on the _master_ branch, automatically run jekyll build and push the generated content to the _gh-pages_ branch.
+==== Update Look and feel
+The layout provided with the https://github.com/asciidoctor/jekyll-asciidoc-quickstart[Jekyll-Asciidoc Quickstart] project is based on http://foundation.zurb.com[Foundation], a responsive design css framework.  You're free to update the layout by editing the `_layouts/default.html` file and css under the `css` directory.
 
-. Install travis gem:
-+
-  $ gem install travis
-+
-. Enable Travis CI for your Jekyll repository:
-.. open your https://travis-ci.org/profile/[profile page] on Travis,
-.. find the repository and turn on the switch,
-.. then click on repository settings (next to the switch) and enable “Build only if .travis.yml is present.”
-. Generate a new personal access token on GitHub:
-.. open https://github.com/settings/tokens/new[this page] to generate a new personal access token,
-.. select the scope _public_repo_, fill some description and confirm.
-. Encrypt the token and add it to your `.travis.yml`:
-.. replace `<token>` with the GitHub token and execute:
-+
-  $ travis encrypt GH_TOKEN=<token> --add env.global
-+
-.. and check that it added something like the following to `.travis.yml`:
-+
-[source, yaml]
-----
-env:
-  global:
-    secure: YOUR-ENCRYPTED-TOKEN
-----
-. Commit changes, push to GitHub and check that Travis has started the job and finished it successfully.
+==== Edit content
+Editing content is very simple.  The easiest way to update your blog is to clone your repository, fire up your favorite text editor and run the content locally.  To do this run the `jekyll serve` command and open a web browser to http://localhost:4000.  Jekyll will automatically process and host changes to the content.
+
+You may also edit your content directly on Github.  To do this, navigate the browser the file you wish to edit, click the pensil (edit) button in the upper right hand corner of the view and make your changes.  When you're finished, commit your changes.  This will trigger Travis to generate and publish a new website including your changes.
+
+For blog posts, Jekyll will recognize files under the `_post` directory, parse the name and place it in the list of posts.  These will show up under the `site.posts` variable.
+
+To display a list of posts, use Jekyll syntax similar to the following:
+
+[source, html]
+--
+{% raw %}
+{% for post in site.posts limit: 5 %}
+    <a href=".{{ post.url }}">{{ post.shortTitle }}</a>
+{% endfor %}
+{% endraw %}
+--
+
+==== Reference documentation
+The following links will help with detailed explanations on Jekyll and Asciidoc.
+
+http://jekyllrb.com[Jekyll]
+http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[Asciidoc Quick Reference]
+http://asciidoctor.org[Asciidoctor]
+

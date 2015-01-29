@@ -15,6 +15,8 @@
     <meta name="copyright" content="ZURB, inc. Copyright (c) 2015"/>
 
     <link rel="stylesheet" href="{{page.root}}css/foundation.css"/>
+    <link rel="stylesheet" href="{{page.root}}css/coderay.css"/>
+    <link rel="stylesheet" href="{{page.root}}css/asciidoctor.css"/>
     <script src="{{page.root}}js/vendor/modernizr.js"></script>
 </head>
 <body>
@@ -22,37 +24,35 @@
 
 <!-- Nav Bar -->
 
-<div class="row">
-    <nav class="top-bar" data-topbar>
-        <ul class="title-area">
-            <!-- Title Area -->
-            <li class="name">
-                <h1>
-                    <a href="{{page.root}}">
-                        {{page.title}}
-                    </a>
-                </h1>
-            </li>
-            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-        </ul>
+<nav class="top-bar" data-topbar>
+    <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name">
+            <h1>
+                <a href="{{page.root}}">
+                    {{page.title}}
+                </a>
+            </h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
 
-        <section class="top-bar-section">
-            <!-- Left Nav Section -->
-            <ul class="right">
-                <li class="divider"></li>
-                <li class="has-dropdown">
-                    <a class="active" href="#">Main Item 1</a>
-                    <ul class="dropdown">
-                        <li><label>Section Name</label></li>
-                        <li><a href="#" class="">Dropdown Level 1</a></li>
-                        <li><a href="#">Dropdown Option</a></li>
-                        <li><a href="#">Dropdown Option</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-    </nav>
-</div>
+    <section class="top-bar-section">
+        <!-- Left Nav Section -->
+        <ul class="right">
+            <li class="divider"></li>
+            <li class="has-dropdown">
+                <a class="active" href="#">Main Item 1</a>
+                <ul class="dropdown">
+                    <li><label>Section Name</label></li>
+                    <li><a href="#" class="">Dropdown Level 1</a></li>
+                    <li><a href="#">Dropdown Option</a></li>
+                    <li><a href="#">Dropdown Option</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</nav>
 <!-- End Nav -->
 
 
