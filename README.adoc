@@ -15,7 +15,7 @@ Unlike some "fork and write" repositories that exist for Markdown blogs, you nee
 
 For this repository, the https://travis-ci.org/[Travis CI] Continuous Integration (CI) server emulates GitHub Pages staging automation, and pushes your blog live upon committing any change to the repository.
 
-After initially configuring the repository, you can use Git command-line on your PC, or even a Git client on your tablet or smartphone to write, commit, and automatically publish blog posts.
+After initially configuring the repository, you can use Git command-line on your computer, or even a Git client on your tablet or smartphone to write, commit, and automatically publish blog posts.
 
 === Help Get AsciiDoc Whitelisted for GitHub Pages
 
@@ -107,4 +107,4 @@ Travis places the built site into the _gh-pages_ branch upon completion.
 
 If you can load the `[username].github.io/index.html/` home page, you have successfully completed basic configuration.
 
-Start writing blog posts and enjoy the AsciiDoc difference, regardless of what device you choose: PC, tablet, or mobile.
+Start writing blog posts and enjoy the AsciiDoc difference, regardless of what device you choose: computer, tablet, or mobile.
