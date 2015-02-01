@@ -1,99 +1,115 @@
-= Jekyll Asciidoc Quickstart
+= Jekyll AsciiDoc Quickstart
+:toc:
 
-= Congratulations!
+== Congratulations!
 
-You've taken the first step down an easy path of blogging with Jekyll. Not only that, you've chosen AsciiDoc over Markdown which will give you fine control of the structure of your posts, and will make them display beautifully when you publish them using the default mobile-first stylesheets included in this repo.
+You've taken the first step down an easy path of blogging with Jekyll. Not only that, you've chosen AsciiDoc over Markdown which will give you fine control of the structure of your posts, and will make them display beautifully when you publish them using the default mobile-first stylesheets included in this repository.
 
-= A Note About GitHub Pages
+== GitHub Pages and AsciiDoc
 
-GitHub Pages does not (yet) whitelist the jekyll-asciidoc plug-in, so you can not write `.adoc` posts and have them instantly publish like Markdown posts do. 
+GitHub Pages does not (yet) whitelist the jekyll-asciidoc plug-in, so you can not write `.adoc` posts and have them instantly publish like Markdown posts do.
 
-You can help change this by creating a support case through http://github.com/support and telling the GitHub team that you want the choice to write in AsciiDoc and have it handled the same as Markdown when pushed to your GitHub Page. Your voice counts: make it heard!
+Unlike some "fork and write" repositories that exist for Markdown blogs, you need to initially configure this repository fork with a computer to publish using AsciiDoc.
 
-== So what does that mean?
+=== How We Work Around The Limitation
 
-Unlike some "fork and write" repos that exist, you need to initially configure the repo with a computer to publish using AsciiDoc. After initially configuring the repo, you can use Git command-line, or even a Git client on your tablet or smartphone to write, commit, and automatically publish blog posts.
+For this repository, the https://travis-ci.org/[Travis CI] Continuous Integration (CI) server emulates GitHub Pages staging automation, and pushes your blog live upon committing any change to the repository.
 
-This repo uses the https://travis-ci.org/[Travis CI] Continuous Integration (CI) server to emulate GitHub Pages staging automation, and pushes your blog live upon committing any change to the repo. 
+After initially configuring the repository, you can use Git command-line on your PC, or even a Git client on your tablet or smartphone to write, commit, and automatically publish blog posts.
 
-= Repo Structure
+=== Help Get AsciiDoc Whitelisted for GitHub Pages
 
-The repo requires the following structure to work correctly:
+You can help change the lack of native AsciiDoc support by creating a support case through http://github.com/support.
+
+Tell the GitHub team that you want the choice to write in AsciiDoc, and have it handled the same way Markdown is when pushed to your GitHub Page.
+
+Your voice counts: make it heard!
+
+== Repository Structure
+
+The repository requires the following structure to work correctly:
 
 * **master**, for markup sources and configuration. This branch can be named anything you choose, however **master** is a general standard used in Jekyll blogs.
 * **gh-pages**, for the generated static content produced by Travis CI. This branch is the username.github.io GitHub Pages domain, which is created automatically for you when the Travis CI job runs.
 
-= Configuring the Repo for Publishing
+== Configuring the Repository for Publishing
 
-The goal of this procedure set is to configure a Travis CI job to listen for commits on the _master_ branch, automatically run the jekyll build, and push the generated content to the _gh-pages_ branch.
+The goal of this procedure set is to configure a Travis CI job to listen for commits on the _master_ branch, automatically run the Jekyll build, and push the generated content to the _gh-pages_ branch.
 
-== Install Minimum Jekyll Requirements
+=== Install Minimum Jekyll Requirements
 
-You must install some software to execute commands in subsequent procedures. Meet the Requirements on the http://jekyllrb.com/docs/installation/[Jekyll Installation] page, which link to pages describing how to install: 
+You must install some software to execute commands in subsequent procedures. Meet the Requirements on the http://jekyllrb.com/docs/installation/[Jekyll Installation] page, which links to pages describing how to install:
+
 * ruby
 * rubygems
 
 For yum-based package managers, the command to run is:
 +
-		$ sudo yum install ruby rubygems
+  $ sudo yum install ruby rubygems
++
 
-== Install Travis Gem
+=== Install Travis Gem
 
-When you install rubygems, you can use the gem internal package management system to install the Travis CI gem. This gem contains tools required to encrypt GitHub Keys, which is the only safe way of doing this.
+When you install rubygems, you can use the gem internal package management system to install the Travis CI gem. This gem contains--among other things--a command-line tool for easily encrypting GitHub tokens.
 
 Run the following command to install the Travis gem:
-+
+```
   $ gem install travis
-+
+```
 
-== Enable Travis CI
+=== Enable Travis CI
 
 Travis CI is configured initially through a browser.
 
-To activate Travis CI for the repo:
+To activate Travis CI for the Repository:
+
 . Open https://travis-ci.org and create an account.
-. Open https://travis-ci.org/profile/[profile page] on Travis,
-. Find the Jekyll repository, and turn on the switch.
-. Click on repository settings (next to the switch) and enable “Build only if .travis.yml is present.”
+. Open your https://travis-ci.org/profile/[profile page] on Travis.
+. Find the Jekyll repositorysitory, and turn on the switch.
+. Click on repositorysitory settings (next to the switch) and enable “Build only if .travis.yml is present.”
 
-== Generate a GitHub Personal Access Token
+=== Generate a GitHub Personal Access Token
 
-Once the repo is activated in Travis, you need a GitHub token to pass into the Travis keytool.
+Once the repository is activated in Travis, you need a GitHub token to pass into the Travis keytool.
 
 To generate a new personal access token on GitHub:
+
 . Open https://github.com/settings/tokens/new.
-. Select the scope _public_repo_, and add a terse description.
+. Select the scope _public_repository_, and add a terse description.
 . Confirm and save the settings.
 
-== Encrypt the GitHub Token for Travis CI
+=== Encrypt the GitHub Token for Travis CI
 
-With the GitHub token created, you can now pass it to the Travis command-line tool, which adds the encryped value to a file in your repo.
+With the GitHub token created, you can now pass it to the Travis command-line tool, which adds the encryped value to a file in your repository.
 
 To encrypt the token and add it to the `.travis.yml` file:
 
 . Move into the same directory as `env.global`.
 . Run the following command, replacing `<token>` with the GitHub token from the previous step.
-+
-  $ travis encrypt GH_TOKEN=<token> --add env.global
-+
+
+	```
+	  $ travis encrypt GH_TOKEN=<token> --add env.global
+	```
+
 . Verify the script added the `secure` global environment variable to `.travis.yml`:
-+
-[source, yaml]
-----
-env:
-  global:
-    secure: [YOUR-ENCRYPTED-TOKEN]
-----
-. Commit all changes, and push to GitHub. 
 
-== Verify the Configuration
+	[source, yaml]
+	----
+	env:
+	  global:
+	    secure: [YOUR-ENCRYPTED-TOKEN]
+	----
 
-To verify if you have configured the repo correctly, open https://travis-ci.org and verify that Travis starts, and subsequenty finishes processing the job.
+. Commit all changes, and push to GitHub.
+
+=== Verify the Configuration
+
+To verify if you have configured the repository correctly, open https://travis-ci.org and verify that Travis starts, and subsequenty finishes processing the job.
 
 Travis places the built site into the _gh-pages_ branch upon completion.
 
-= Summary
+== Summary
 
-If you can load the username.github.io/index.html/ home page, you have successfully completed basic configuration. 
+If you can load the `[username].github.io/index.html/` home page, you have successfully completed basic configuration.
 
 Start writing blog posts and enjoy the AsciiDoc difference, regardless of what device you choose: PC, tablet, or mobile.
