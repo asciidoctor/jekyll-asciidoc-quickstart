@@ -44,18 +44,16 @@ You must install some software to execute commands in subsequent procedures. Mee
 * rubygems
 
 For yum-based package managers, the command to run is:
-+
+
   $ sudo yum install ruby rubygems
-+
 
 === Install Travis Gem
 
 When you install rubygems, you can use the gem internal package management system to install the Travis CI gem. This gem contains--among other things--a command-line tool for easily encrypting GitHub tokens.
 
 Run the following command to install the Travis gem:
-```
+
   $ gem install travis
-```
 
 === Enable Travis CI
 
@@ -87,18 +85,15 @@ To encrypt the token and add it to the `.travis.yml` file:
 . Move into the same directory as `env.global`.
 . Run the following command, replacing `<token>` with the GitHub token from the previous step.
 
-	```
-	  $ travis encrypt GH_TOKEN=<token> --add env.global
-	```
+  $ travis encrypt GH_TOKEN=<token> --add env.global
 
 . Verify the script added the `secure` global environment variable to `.travis.yml`:
-
-	[source, yaml]
-	----
-	env:
-	  global:
-	    secure: [YOUR-ENCRYPTED-TOKEN]
-	----
+[source, yaml]
+  ----
+  env:
+    global:
+      secure: [YOUR-ENCRYPTED-TOKEN]
+  ----
 
 . Commit all changes, and push to GitHub.
 
