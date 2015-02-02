@@ -88,13 +88,14 @@ To encrypt the token and add it to the `.travis.yml` file:
   $ travis encrypt GH_TOKEN=<token> --add env.global
 
 . Verify the script added the `secure` global environment variable to `.travis.yml`:
++
 [source, yaml]
-  ----
-  env:
-    global:
-      secure: [YOUR-ENCRYPTED-TOKEN]
-  ----
-
+----
+env:
+  global:
+    secure: [YOUR-ENCRYPTED-TOKEN]
+----
++
 . Commit all changes, and push to GitHub.
 
 === Verify the Configuration
