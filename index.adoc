@@ -14,9 +14,6 @@ You've successfully set up and deployed an Jekyll website powered by Asciidoc us
 
 Now that you've set up your website to run with Asciidoc you have a ton of options available to you.
 
-==== Update Look and feel
-The layout provided with the https://github.com/asciidoctor/jekyll-asciidoc-quickstart[Jekyll-Asciidoc Quickstart] project is based on http://foundation.zurb.com[Foundation], a responsive design css framework.  You're free to update the layout by editing the `_layouts/default.html` file and css under the `css` directory.
-
 ==== Edit content
 Editing content is very simple.  The easiest way to update your blog is to clone your repository, fire up your favorite text editor and run the content locally.  To do this run the `jekyll serve` command and open a web browser to http://localhost:4000.  Jekyll will automatically process and host changes to the content.
 
@@ -34,6 +31,12 @@ To display a list of posts, use Jekyll syntax similar to the following:
 {% endfor %}
 {% endraw %}
 --
+
+
+==== Update Look and feel
+The layout provided with the https://github.com/asciidoctor/jekyll-asciidoc-quickstart[Jekyll-Asciidoc Quickstart] project is based on http://foundation.zurb.com[Foundation], a responsive design css framework.  You're free to update the layout by editing the `_layouts/default.html` file and css under the `css` directory.
+
+This blog layout is based on the http://foundation.zurb.com/templates/blog.html[Blog template].
 
 ==== Reference documentation
 The following links will help with detailed explanations on Jekyll and Asciidoc.
