@@ -3,16 +3,13 @@
 
 The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on Github with content based in AsciiDoc.  This project combines the power of AsciiDoc with a beautiful CSS framework and blog-ready template on top of Github's existing publishing infrastructure.
 
-= Directions
+== Directions
 
 The goal of this procedure set is to configure a Travis CI job to listen for commits on the _master_ branch, automatically run the Jekyll build, and push the generated content to the _gh-pages_ branch.
 
 === 1. Install Minimum Jekyll Requirements
 
-You must install some software to execute commands in subsequent procedures. Meet the Requirements on the http://jekyllrb.com/docs/installation/[Jekyll Installation] page, which links to pages describing how to install:
-
-* ruby
-* rubygems
+You must install some software to execute commands in subsequent procedures. The Requirements on the http://jekyllrb.com/docs/installation/[Jekyll Installation] page describe how to install both ruby and rubygems.
 
 For yum-based package managers, the command to run is:
 
