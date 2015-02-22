@@ -1,7 +1,6 @@
 # jekyll configuration
 
 title: "Jekyll-asciidoc-quickstart"
-highlighter: true
 
 asciidoctor:
   attributes:
