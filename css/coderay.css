@@ -1,6 +1,6 @@
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
 pre.CodeRay {background-color:#f7f7f8; border: solid; border-color: #dfdfdf; border-width: 1px;}
-.CodeRay code{border-style: none;}
+.CodeRay code{border-style: none; padding: 0}
 .CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
 .CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
 .CodeRay .line-numbers strong{font-weight: normal}
