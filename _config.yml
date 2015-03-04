@@ -1,12 +1,11 @@
 # jekyll configuration
 
 title: "Jekyll-asciidoc-quickstart"
-pygments: true
 
 asciidoctor:
   attributes:
     - idseparator=_
     - source-highlighter=coderay
-    - icons=font
+    - icons=font-awesome
 
 # end of configuration

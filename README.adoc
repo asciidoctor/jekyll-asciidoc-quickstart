@@ -1,9 +1,94 @@
 = Jekyll AsciiDoc Quickstart
 :toc:
 
-== Congratulations!
+The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on Github with content based in AsciiDoc.  This project combines the power of AsciiDoc with a beautiful CSS framework and blog-ready template on top of Github's existing publishing infrastructure.
 
-You've taken the first step down an easy path of blogging with Jekyll. Not only that, you've chosen AsciiDoc over Markdown which will give you fine control of the structure of your posts, and will make them display beautifully when you publish them using the default mobile-first stylesheets included in this repository.
+== Directions
+
+The goal of this procedure set is to configure a Travis CI job to listen for commits on the _master_ branch, automatically run the Jekyll build, and push the generated content to the _gh-pages_ branch.
+
+=== {counter:directions}. Install Minimum Jekyll Requirements
+
+You must install some software to execute commands in subsequent procedures. The Requirements on the http://jekyllrb.com/docs/installation/[Jekyll Installation] page describe how to install both ruby and rubygems.
+
+For yum-based package managers, the command to run is:
+
+  $ sudo yum install ruby rubygems
+
+=== {counter:directions}. Install Travis Gem
+
+When you install rubygems, you can use the gem internal package management system to install the Travis CI gem. This gem contains--among other things--a command-line tool for easily encrypting GitHub tokens.
+
+Run the following command to install the Travis gem:
+
+  $ gem install travis
+
+=== {counter:directions}. Fork this Repository and Clone
+
+To create your own copy of this repository, start by clicking the fork button in the upper right corner of the Github page.
+
+Next, open a command line window and make a clone of your new repository:
+
+  $ git clone https://github.com/YOUR-USERNAME/jekyll-asciidoc-quickstart
+
+=== {counter:directions}. Enable Travis CI
+
+Travis CI is configured initially through a browser.
+
+To activate Travis CI for the Repository:
+
+. Open https://travis-ci.org and create an account.
+. Open your https://travis-ci.org/profile/[profile page] on Travis.
+. Find the Jekyll repository, and turn on the switch.
+. Click on repository settings (next to the switch) and enable “Build only if .travis.yml is present.”
+
+=== {counter:directions}. Generate a GitHub Personal Access Token
+
+Once the repository is activated in Travis, you need a GitHub token to pass into the Travis keytool.
+
+To generate a new personal access token on GitHub:
+
+. Open https://github.com/settings/tokens/new.
+. Select the scope _public_repository_, and add a terse description.
+. Confirm and save the settings.
+
+=== {counter:directions}. Encrypt the GitHub Token for Travis CI
+
+With the GitHub token created, you can now pass it to the Travis command-line tool, which adds the encrypted value to a file in your repository.
+
+To encrypt the token and add it to the `.travis.yml` file in your cloned repository:
+
+. Move into the same directory as `env.global`.
+. Run the following command, replacing `<token>` with the GitHub token from the previous step.
+
+  $ travis encrypt GH_TOKEN=<token> --add env.global
+
+. Verify the script added the `secure` global environment variable to `.travis.yml`:
++
+[source, yaml]
+----
+env:
+  global:
+    secure: [YOUR-ENCRYPTED-TOKEN]
+----
++
+. Commit all changes, and push to GitHub.
+
+  $ git push
+
+=== {counter:directions}. Verify the Configuration
+
+To verify if you have configured the repository correctly, open https://travis-ci.org and verify that Travis starts, and subsequently finishes processing the job.
+
+Travis should place the built site into the _gh-pages_ branch upon completion.
+
+== Summary
+
+If you can load the `[username].github.io/jekyll-asciidoc-quickstart/index.html/` home page, you have successfully completed basic configuration.
+
+Start writing blog posts and enjoy the AsciiDoc difference, regardless of what device you choose: computer, tablet, or mobile.
+
+= Details
 
 == GitHub Pages and AsciiDoc
 
@@ -31,81 +116,3 @@ The repository requires the following structure to work correctly:
 
 * **master**, for markup sources and configuration. This branch can be named anything you choose, however **master** is a general standard used in Jekyll blogs.
 * **gh-pages**, for the generated static content produced by Travis CI. This branch is the username.github.io GitHub Pages domain, which is created automatically for you when the Travis CI job runs.
-
-== Configuring the Repository for Publishing
-
-The goal of this procedure set is to configure a Travis CI job to listen for commits on the _master_ branch, automatically run the Jekyll build, and push the generated content to the _gh-pages_ branch.
-
-=== Install Minimum Jekyll Requirements
-
-You must install some software to execute commands in subsequent procedures. Meet the Requirements on the http://jekyllrb.com/docs/installation/[Jekyll Installation] page, which links to pages describing how to install:
-
-* ruby
-* rubygems
-
-For yum-based package managers, the command to run is:
-
-  $ sudo yum install ruby rubygems
-
-=== Install Travis Gem
-
-When you install rubygems, you can use the gem internal package management system to install the Travis CI gem. This gem contains--among other things--a command-line tool for easily encrypting GitHub tokens.
-
-Run the following command to install the Travis gem:
-
-  $ gem install travis
-
-=== Enable Travis CI
-
-Travis CI is configured initially through a browser.
-
-To activate Travis CI for the Repository:
-
-. Open https://travis-ci.org and create an account.
-. Open your https://travis-ci.org/profile/[profile page] on Travis.
-. Find the Jekyll repositorysitory, and turn on the switch.
-. Click on repositorysitory settings (next to the switch) and enable “Build only if .travis.yml is present.”
-
-=== Generate a GitHub Personal Access Token
-
-Once the repository is activated in Travis, you need a GitHub token to pass into the Travis keytool.
-
-To generate a new personal access token on GitHub:
-
-. Open https://github.com/settings/tokens/new.
-. Select the scope _public_repository_, and add a terse description.
-. Confirm and save the settings.
-
-=== Encrypt the GitHub Token for Travis CI
-
-With the GitHub token created, you can now pass it to the Travis command-line tool, which adds the encryped value to a file in your repository.
-
-To encrypt the token and add it to the `.travis.yml` file:
-
-. Move into the same directory as `env.global`.
-. Run the following command, replacing `<token>` with the GitHub token from the previous step.
-
-  $ travis encrypt GH_TOKEN=<token> --add env.global
-
-. Verify the script added the `secure` global environment variable to `.travis.yml`:
-+
-[source, yaml]
-----
-env:
-  global:
-    secure: [YOUR-ENCRYPTED-TOKEN]
-----
-+
-. Commit all changes, and push to GitHub.
-
-=== Verify the Configuration
-
-To verify if you have configured the repository correctly, open https://travis-ci.org and verify that Travis starts, and subsequenty finishes processing the job.
-
-Travis places the built site into the _gh-pages_ branch upon completion.
-
-== Summary
-
-If you can load the `[username].github.io/index.html/` home page, you have successfully completed basic configuration.
-
-Start writing blog posts and enjoy the AsciiDoc difference, regardless of what device you choose: computer, tablet, or mobile.
