@@ -84,7 +84,7 @@ Travis should place the built site into the _gh-pages_ branch upon completion.
 
 == Summary
 
-If you can load the `[username].github.io/jekyll-asciidoc-quickstart/index.html/` home page, you have successfully completed basic configuration.
+If you can load the `[username].github.io/jekyll-asciidoc-quickstart` home page, you have successfully completed basic configuration.
 
 Start writing blog posts and enjoy the AsciiDoc difference, regardless of what device you choose: computer, tablet, or mobile.
 
