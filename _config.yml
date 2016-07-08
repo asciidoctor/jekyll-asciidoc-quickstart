@@ -1,11 +1,16 @@
-# jekyll configuration
-
-title: "Jekyll-asciidoc-quickstart"
-
+title: Jekyll AsciiDoc Quickstart
+description: The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.
+exclude:
+  - LICENSE.adoc
+  - README.adoc
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+asciidoc: {}
 asciidoctor:
+  base_dir: :docdir
+  safe: unsafe
   attributes:
     - idseparator=_
     - source-highlighter=coderay
     - icons=font
-
-# end of configuration

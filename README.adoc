@@ -1,7 +1,7 @@
 = Jekyll AsciiDoc Quickstart
 :toc:
 
-The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on Github with content based in AsciiDoc.  This project combines the power of AsciiDoc with a beautiful CSS framework and blog-ready template on top of Github's existing publishing infrastructure.
+The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.  This project combines the power of AsciiDoc with a beautiful CSS framework and blog-ready template on top of GitHub's existing publishing infrastructure.
 
 == Directions
 
@@ -25,7 +25,7 @@ Run the following command to install the Travis gem:
 
 === {counter:directions}. Fork this Repository and Clone
 
-To create your own copy of this repository, start by clicking the fork button in the upper right corner of the Github page.
+To create your own copy of this repository, start by clicking the fork button in the upper right corner of the GitHub page.
 
 Next, open a command line window and make a clone of your new repository:
 

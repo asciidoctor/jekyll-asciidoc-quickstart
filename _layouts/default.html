@@ -3,21 +3,16 @@
 <html class="lt-ie10" lang="en"> <![endif]-->
 <html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{page.title}}</title>
-
-
-    <meta name="description"
-          content="Update what your Blog is about in this section"/>
-
-    <meta name="author" content="Your name goes here"/>
-    <meta name="copyright" content="Maybe consider a Creative Commons license"/>
-
-    <link rel="stylesheet" href="{{page.root}}css/foundation.css"/>
-    <link rel="stylesheet" href="{{page.root}}css/font-awesome.css"/>
-    <link rel="stylesheet" href="{{page.root}}css/coderay.css"/>
-    <link rel="stylesheet" href="{{page.root}}css/asciidoctor.css"/>
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="Your name goes here">
+    <meta name="copyright" content="Maybe consider a Creative Commons license">
+    <link rel="stylesheet" href="{{page.root}}css/foundation.css">
+    <link rel="stylesheet" href="{{page.root}}css/font-awesome.css">
+    <link rel="stylesheet" href="{{page.root}}css/coderay.css">
+    <link rel="stylesheet" href="{{page.root}}css/asciidoctor.css">
     <script src="{{page.root}}js/vendor/modernizr.js"></script>
     <script src="{{page.root}}js/toc.js"></script>
 </head>
@@ -31,9 +26,7 @@
         <!-- Title Area -->
         <li class="name">
             <h1>
-                <a href="{{page.root}}">
-                    {{page.title}}
-                </a>
+                <a href="{{page.root}}">{{site.title}}</a>
             </h1>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -62,7 +55,7 @@
         <h4>Posts</h4>
         <ul id="posts" class="posts nav">
             {% for post in site.posts limit: 5 %}
-            <li><a href=".{{ post.url }}">{{ post.shortTitle }}</a></li>
+            <li><a href=".{{ post.url }}">{{ post.navtitle }}</a></li>
             {% endfor %}
         </ul>
 
@@ -85,7 +78,7 @@
 
 <footer class="row">
     <div class="large-12 columns">
-        <hr/>
+        <hr>
         <div class="row">
             <div class="large-12 columns">
                 <p>Footer</p>
@@ -97,15 +90,9 @@
 <script src="{{page.root}}js/vendor/jquery.js"></script>
 <script src="{{page.root}}js/foundation.min.js"></script>
 <script>
-    $(document).foundation();
-</script>
-<script src="{{page.root}}js/vendor/jquery.js"></script>
-<script src="{{page.root}}js/foundation/foundation.js"></script>
-<script>
-    $(document).foundation();
-
-    var doc = document.documentElement;
-    doc.setAttribute('data-useragent', navigator.userAgent);
+$(document).foundation();
+var doc = document.documentElement;
+doc.setAttribute('data-useragent', navigator.userAgent);
 </script>
 </body>
 </html>
