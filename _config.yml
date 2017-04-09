@@ -1,5 +1,11 @@
-title: Jekyll AsciiDoc Quickstart
-description: The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.
+# Site settings
+title: Relm Blog
+description: "An asynchronous GUI Rust library, based on GTK+ and futures/tokio"
+url: "http://relm.ml"
+author:
+  name: "Antoni Boucher"
+  email: "bouanto@zoho.com"
+  url: "http://relm.ml"
 exclude:
   - LICENSE.adoc
   - README.adoc
@@ -12,5 +18,38 @@ asciidoctor:
   safe: unsafe
   attributes:
     - idseparator=_
-    - source-highlighter=coderay
+    - source-highlighter=pygments
+    - pygments-css=class
+    - pygments-style=monokai
+    - pygments-stylesheet=css/asciidoc-pygments.css
     - icons=font
+
+# Build settings
+baseurl:
+source: .
+destination: ./_site
+permalink: /:title
+paginate: 8
+paginate_path: /page:num/
+
+# Default values
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Plugins
+gems:
+  - jekyll-paginate
+  - jekyll-sitemap
+
+# Custom variables
+version: "1.0.0"
+
+# Options
+custom_header: false
+custom_nav_footer: false
+reverse: false
