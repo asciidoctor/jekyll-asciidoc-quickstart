@@ -1,0 +1,69 @@
+= Relm, a GUI library, based on GTK+ and futures, written in Rust
+:page-navtitle: Relm, a GUI library, based on GTK+ and futures, written in Rust
+
+Relm is a new crate (Rust library) to develop asynchronous GUI applications in Rust.
+
+== Introduction
+
+Relm provides a way to combine futures/tokio with GTK+ in an elegant way, to easily write asynchronous GUI application.
+This library is inspired by the http://elm-lang.org/[elm programming language] in that it uses https://guide.elm-lang.org/architecture/[The Elm Architecture], but adapted to both Rust a desktop GUI application.
+
+== Pain points with using GTK+ in Rust
+
+I created relm because I had some recurrent issues when writing a somewhat complex GTK+ application in Rust.
+These pain points are detailed below.
+
+=== State mutation
+
+It is common practise to associate some data (called a model) with a widget and mutate it when the user does an action like clicking on a button.
+With gtk-rs, it is not possible to directly mutate a state in reaction to an event.
+To do so, one needs to use `Rc<RefCell<Model>>`:
+
+[source,rust]
+----
+let model = Rc::new(RefCell::new(Model { count: 0 }));
+button.connect_clicked(move |_| {
+  (*model.borrow_mut()).count += 1;
+  label.set_text(&format!("{}", (*model.borrow()).count));
+});
+----
+
+Which is not ergonomic and error-prone because you can get an error at run-time instead of compile time.
+
+=== Cannot easily create new widgets
+
+In Vala, it is easy to create a new widget. All you need is to create a new class inheriting from a widget:
+
+[source,vala]
+----
+class MyWidget : DrawingArea {
+}
+----
+
+and you can use this widget like any other:
+
+[source,vala]
+----
+var widget = new MyWidget();
+window.add(widget);
+----
+
+=== Asynchronous
+
+== Inspiration by Elm.
+
+== Overview showing the #[widget] attribute.
+
+== Example without the attribute with explanations.
+
+== Show example using futures/tokio.
+
+== Warning about API unstability/still in development.
+
+== Conclusion
+
+Comments on HackerNews or Reddit.
+
+Open issues on GitHub.
+
+// TODO: post on HackerNews, Reddit.
