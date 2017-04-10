@@ -5,8 +5,8 @@ Relm is a new crate (Rust library) to develop asynchronous GUI applications in R
 
 == Introduction
 
-Relm provides a way to combine futures/tokio with GTK+ in an elegant way, to easily write asynchronous GUI application.
-This library is inspired by the http://elm-lang.org/[elm programming language] in that it uses https://guide.elm-lang.org/architecture/[The Elm Architecture], but adapted to both Rust a desktop GUI application.
+Relm provides a way to combine futures/tokio with GTK+ in an elegant way, to easily write asynchronous GUI applications.
+This library is inspired by the http://elm-lang.org/[elm programming language] in that it uses https://guide.elm-lang.org/architecture/[The Elm Architecture], but adapted to both Rust and desktop applications.
 
 == Pain points with using GTK+ in Rust
 
@@ -15,8 +15,8 @@ These pain points are detailed below.
 
 === State mutation
 
-It is common practise to associate some data (called a model) with a widget and mutate it when the user does an action like clicking on a button.
-With gtk-rs, it is not possible to directly mutate a state in reaction to an event.
+It is common practise to associate some data (called model) with a widget and mutate it when the user does an action like clicking on a button.
+With `gtk-rs`, it is not possible to directly mutate a state in reaction to an event.
 To do so, one needs to use `Rc<RefCell<Model>>`:
 
 [source,rust]
@@ -30,9 +30,16 @@ button.connect_clicked(move |_| {
 
 Which is not ergonomic and error-prone because you can get an error at run-time instead of compile time.
 
+=== Asynchronous UI
+
+This issue is more related to GTK+ in general.
+Sometimes, one wants to be able to wait after an HTTP request to finish or a timeout to happen and then update the UI accordingly, without freezing the UI.
+GTK+ supports this feature.
+However, I believe that having an abstraction to simplify asynchronous programming can make it easier to write GUI that don't block the UI.
+
 === Cannot easily create new widgets
 
-In Vala, it is easy to create a new widget. All you need is to create a new class inheriting from a widget:
+In Vala (and other object-oriented languages), it is easy to create a new widget. All you need is to create a new class inheriting from a widget:
 
 [source,vala]
 ----
@@ -48,22 +55,392 @@ var widget = new MyWidget();
 window.add(widget);
 ----
 
-=== Asynchronous
+It is not as easy to do in Rust because it does not support subclassing.
 
-== Inspiration by Elm.
+One workaround is to add a `Deref` implementation for your widget:
 
-== Overview showing the #[widget] attribute.
+[source,rust]
+----
+struct MyWidget {
+    drawing_area: DrawingArea,
+}
 
-== Example without the attribute with explanations.
+impl Deref for MyWidget {
+    type Target = DrawingArea;
 
-== Show example using futures/tokio.
+    fn deref(&self) -> &DrawingArea {
+        &self.drawing_area
+    }
+}
+----
 
-== Warning about API unstability/still in development.
+but then, you need to manually dereference the variable to use the widget:
+
+[source,rust]
+----
+window.add(&*widget);
+----
+
+Once again, it is not ergonomic and, while other solutions are available, it is currently not the way to go in `gtk-rs`.
+
+For all these reasons, I decided to write https://github.com/antoyo/relm[relm], employing https://github.com/alexcrichton/futures-rs[futures] and https://github.com/tokio-rs[tokio].
+This allows the users of `relm` to do an https://github.com/antoyo/relm/blob/master/examples/http.rs[HTTP request with tokio] without freezing the UI.
+
+== Inspiration by Elm
+
+`Relm` took its inspiration from the Elm programming language.
+Having used this language a bit, I found out it provides a good solution to do MVC.
+To create a program in Elm, you only need to provide a model, an `update` function to transform the model when some event happens and a `view` function to create the view in a declarative way.
+The view communicate with the `update` function through message passing.
+In `relm`, it is very similar, but I adapted the pattern to Rust.
+For instance, `update` and `view` are methods of the `Widget` trait.
+Also, mutation is used when it makes sense (Elm being purely functional, mutation is not used in this language).
+
+== Example using the `#[widget]` attribute
+
+Let's look at an example to see how to create a GUI application using `relm`:
+
+[source,rust]
+----
+// Import statements ommited.
+
+// Define the structure of the model.
+#[derive(Clone)]
+struct Model {
+    counter: i32,
+}
+
+// The messages that can be sent to the update function.
+#[derive(Msg)]
+enum Msg {
+    Decrement,
+    Increment,
+    Quit,
+}
+
+#[widget]
+impl Widget<Msg> for Win {
+    // The initial model.
+    fn model() -> Model {
+        Model {
+            counter: 0,
+        }
+    }
+
+    // Update the model according to the message received.
+    fn update(&mut self, event: Msg, model: &mut Model) {
+        match event {
+            Decrement => model.counter -= 1,
+            Increment => model.counter += 1,
+            Quit => gtk::main_quit(),
+        }
+    }
+
+    view! {
+        gtk::Window {
+            gtk::Box {
+                // Set the orientation property of the Box.
+                orientation: Vertical,
+                // Create a Button inside the Box.
+                gtk::Button {
+                    // Send the message Increment when the button is clicked.
+                    clicked => Increment,
+                    label: "+",
+                },
+                gtk::Label {
+                    text: &model.counter.to_string(),
+                },
+                gtk::Button {
+                    clicked => Decrement,
+                    label: "-",
+                },
+            },
+            delete_event(_, _) => (Quit, Inhibit(false)),
+        }
+    }
+}
+
+fn main() {
+    Relm::run::<Win>().unwrap();
+}
+----
+
+(This example is truncated, look at the complete file https://github.com/antoyo/relm/blob/master/examples/buttons-attribute.rs[here].)
+
+Those of you that used Elm can find the similarity between it and `relm`.
+A lot of magic happens in the `#[widget]` attribute.footnote:[Attributes currently requires a nightly compiler.]
+
+The `view!` macro allows to write the view in a declarative way.
+One can connect a GTK+ signal to send a message using the fat arrow syntax.
+For instance, the following:
+
+[source,rust]
+----
+gtk::Button {
+    clicked => Increment,
+}
+----
+
+means that the message `Increment` will be sent to the `update` function when the button is clicked.
+
+The attribute also changes the `update` function to insert the calls to `gtk::Label::set_text()` when the `counter` field of the `model` is updated.
+
+== Example without the attribute
+
+If it is not possible for you to depend on Rust nightly, it is possible to avoid using the `#[widget]` attribute.
+However, it requires a bit of boilerplate code.
+Here is the same example without the attribute:
+
+[source,rust]
+----
+#[derive(Clone)]
+struct Model {
+    counter: i32,
+}
+
+#[derive(Msg)]
+enum Msg {
+    Decrement,
+    Increment,
+    Quit,
+}
+
+// Create the structure that holds the widgets used in the view.
+struct Win {
+    counter_label: Label,
+    window: Window,
+}
+
+impl Widget<Msg> for Win {
+    // Specify the type of the outer widget.
+    type Container = Window;
+    // Specify the model used for this widget.
+    type Model = Model;
+
+    // Return the outer widget.
+    fn container(&self) -> &Self::Container {
+        &self.window
+    }
+
+    fn model() -> Model {
+        Model {
+            counter: 0,
+        }
+    }
+
+    fn update(&mut self, event: Msg, model: &mut Model) {
+        let label = &self.counter_label;
+
+        match event {
+            Decrement => {
+                model.counter -= 1;
+                // Manually update the view.
+                label.set_text(&model.counter.to_string());
+            },
+            Increment => {
+                model.counter += 1;
+                label.set_text(&model.counter.to_string());
+            },
+            Quit => gtk::main_quit(),
+        }
+    }
+
+    fn view(relm: RemoteRelm<Msg>, _model: &Self::Model) -> Self {
+        // Create the view using the normal GTK+ method calls.
+        let vbox = gtk::Box::new(Vertical, 0);
+
+        let plus_button = Button::new_with_label("+");
+        vbox.add(&plus_button);
+
+        let counter_label = Label::new("0");
+        vbox.add(&counter_label);
+
+        let minus_button = Button::new_with_label("-");
+        vbox.add(&minus_button);
+
+        let window = Window::new(WindowType::Toplevel);
+
+        window.add(&vbox);
+
+        window.show_all();
+
+        // Send the message Increment when the button is clicked.
+        connect!(relm, plus_button, connect_clicked(_), Increment);
+        connect!(relm, minus_button, connect_clicked(_), Decrement);
+        connect!(relm, window, connect_delete_event(_, _) (Some(Quit), Inhibit(false)));
+
+        Win {
+            counter_label: counter_label,
+            window: window,
+        }
+    }
+}
+
+fn main() {
+    Relm::run::<Win>().unwrap();
+}
+----
+
+(This example is truncated, look at the complete file https://github.com/antoyo/relm/blob/master/examples/buttons.rs[here].)
+
+You can see some similarity with the previous example, but you now need to create the widgets the same way you would do when using `gtk-rs` directly, i.e. by calling constructors like `Button::new_with_label()`.
+Moreover, you need to update the view manually in the `update` method:
+
+[source,rust]
+----
+label.set_text(&model.counter.to_string());
+----
+
+You also need to create the `container` function, the types `Container` and `Model` and the `struct Win` that are automatically created by the `#[widget]` attribute.
+
+One difference with `gtk-rs` is how you connect signals:
+
+[source,rust]
+----
+connect!(relm, plus_button, connect_clicked(_), Increment);
+----
+
+This is the equivalent of:
+
+[source,rust]
+----
+clicked => Increment
+----
+
+that was used in the previous example.
+
+== Example using tokio
+
+That was a basic example.
+Now let's look at a more involved example actually using `tokio` to send messages to a websockets server:
+
+[source,rust]
+----
+type WSService = ClientService<TcpStream, WebSocketProtocol>;
+
+#[derive(Clone)]
+struct Model {
+    // The message to be sent.
+    message: String,
+    service: Option<WSService>,
+    // This contains all the messages received from the websockets server.
+    text: String,
+}
+
+#[derive(Msg)]
+enum Msg {
+    // The user changed the message to be sent.
+    Change(String),
+    // Connection to the server successful.
+    Connected(WSService),
+    // A message received from the server.
+    Message(String),
+    // Send a message to the server.
+    Send,
+    Quit,
+}
+
+#[widget]
+impl Widget<Msg> for Win {
+    fn model() -> Model {
+        Model {
+            message: String::new(),
+            service: None,
+            text: String::new(),
+        }
+    }
+
+    fn subscriptions(relm: &Relm<Msg>) {
+        // Connect to the websocket server.
+        let handshake_future = ws_handshake(relm.handle());
+        let future = relm.connect_ignore_err(handshake_future, Connected);
+        relm.exec(future);
+    }
+
+    fn update(&mut self, event: Msg, model: &mut Model) {
+        match event {
+            Change(message) => model.message = message,
+            Connected(service) => model.service = Some(service),
+            Message(message) => model.text += &format!("{}\n", message),
+            Send => {
+                model.message = String::new();
+                self.entry.grab_focus();
+            },
+            Quit => gtk::main_quit(),
+        }
+    }
+
+    fn update_command(relm: &Relm<Msg>, event: Msg, model: &mut Model) {
+        if let Send = event {
+            if let Some(ref service) = model.service {
+                // Send the message to the server.
+                let send_future = ws_send(service, &model.message);
+                relm.connect_exec_ignore_err(send_future, Message);
+            }
+        }
+    }
+
+    view! {
+        gtk::Window {
+            gtk::Box {
+                orientation: Vertical,
+                gtk::Label {
+                    text: &model.text,
+                },
+                // Give a name to this widget, so that we can use it in the update function.
+                #[name="entry"]
+                gtk::Entry {
+                    activate => Send,
+                    changed(entry) => Change(entry.get_text().unwrap_or_else(String::new)),
+                    text: &model.message,
+                },
+                gtk::Button {
+                    clicked => Send,
+                    label: "Send",
+                },
+            },
+            delete_event(_, _) => (Quit, Inhibit(false)),
+        }
+    }
+}
+----
+
+There are two new methods in this example: `subscriptions` and `update_command`.
+
+The former is to execute futures when the application starts.
+In this case, we initiate the websockets connection and connect the future to send the `Connected` message.
+This example ignores the possible errors, but it is also possible to handle the case where the future resolves to an error.
+
+The `update_command` method is used in `relm` to execute futures when a message is received.
+This example sends the message `Message(message)` where `message` is the response from the websockets server.
+Relm executes the `update_command` method in another thread, where the tokio event loop runs: this is why we cannot execute the futures in the `update` method.
+
+As you can see, events from GTK+ widgets and events from futures are managed in the same way.
+
+== Warning about API instability
+
+It is to be noted that `relm` is under heavy development and has not been thoroughly tested.
+Moreover, the API is currently unstable and will be updated in the next releases.
+For instance, the `update_command` method will be removed (and merge with the `update` method) when this crate will switch to using https://github.com/antoyo/futures-glib-rs[futures-glib] instead of using another thread to run the tokio event loop.
 
 == Conclusion
 
+That was a short introduction to `relm`.
+Look at the https://github.com/antoyo/relm/tree/master/examples[examples] if you want to learn more.
+The https://github.com/antoyo/relm#relm[readme] and the https://docs.rs/relm/[documentation] also provides details about how to use this crate.
+
 Comments on HackerNews or Reddit.
 
-Open issues on GitHub.
+If you find any issue, please open an https://github.com/antoyo/relm/issues[issue on GitHub].
 
-// TODO: post on HackerNews, Reddit.
+=== Future of relm
+
+Here are some improvements I'll do in the next weeks and months:
+
+ * Develop a GUI functional testing crate.
+ * Improve the `#[widget]` attribute.
+ * Add a more complex example.
+ * Improve tests and documentation.
+ * Switch to `futures-glib`.
+
+And, of course, I'll use `relm` for my own projects https://github.com/antoyo/mg[mg] and https://github.com/antoyo/titanium[titanium].
