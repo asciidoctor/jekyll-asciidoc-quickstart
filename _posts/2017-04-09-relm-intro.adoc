@@ -148,6 +148,7 @@ impl Widget<Msg> for Win {
                     label: "+",
                 },
                 gtk::Label {
+                    // Bind the text property of the label to the counter attribute of the model.
                     text: &model.counter.to_string(),
                 },
                 gtk::Button {
@@ -167,9 +168,9 @@ fn main() {
 
 (This example is truncated, look at the complete file https://github.com/antoyo/relm/blob/master/examples/buttons-attribute.rs[here].)
 
-Those of you that used Elm can find the similarity between it and `relm`.
+Those of you that used Elm can notice the similarity between it and `relm`.
 A lot of magic happens in the `#[widget]` attribute.footnote:[Attributes currently requires a nightly compiler.]
-For example, this attribute generate the `struct Win` that contains the GTK+ and relm widgets.
+For example, this attribute generates the `struct Win` that contains the GTK+ and relm widgets.
 
 The `view!` macro allows to write the view in a declarative way.
 One can connect a GTK+ signal to send a message using the fat arrow syntax.
@@ -406,6 +407,8 @@ impl Widget<Msg> for Win {
 }
 ----
 
+(You can see the complete example https://github.com/antoyo/relm/blob/master/examples/websockets-attribute.rs[here].)
+
 There are two new methods in this example: `subscriptions` and `update_command`.
 
 The former is to execute futures when the application starts.
@@ -428,11 +431,11 @@ For instance, the `update_command` method will be removed (and merge with the `u
 
 That was a short introduction to `relm`.
 Look at the https://github.com/antoyo/relm/tree/master/examples[examples] if you want to learn more.
-The https://github.com/antoyo/relm#relm[readme] and the https://docs.rs/relm/[documentation] also provides details about how to use this crate.
+The https://github.com/antoyo/relm#relm[readme] and the https://docs.rs/relm/[documentation] also provide details about how to use this crate.
 
 Comments on HackerNews or Reddit.
 
-If you find any issue, please open an https://github.com/antoyo/relm/issues[issue on GitHub].
+If you find any issue while using this library, please open an https://github.com/antoyo/relm/issues[issue on GitHub].
 
 === Future of relm
 
