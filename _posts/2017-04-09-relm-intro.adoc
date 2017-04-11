@@ -15,7 +15,7 @@ These pain points are detailed below.
 
 === State mutation
 
-It is common practise to associate some data (called model) with a widget and mutate it when the user does an action like clicking on a button.
+It is common practice to associate some data (called a model) with a widget and mutate it when the user does an action like clicking on a button.
 With `gtk-rs`, it is not possible to directly mutate a state in reaction to an event.
 To do so, one needs to use `Rc<RefCell<Model>>`:
 
@@ -35,7 +35,7 @@ Which is not ergonomic and error-prone because you can get an error at run-time 
 This issue is more related to GTK+ in general.
 Sometimes, one wants to be able to wait after an HTTP request to finish or a timeout to happen and then update the UI accordingly, without freezing the UI.
 GTK+ supports this feature.
-However, I believe that having an abstraction to simplify asynchronous programming can make it easier to write GUI that don't block the UI.
+However, I believe that having an abstraction to simplify asynchronous programming can make it easier to write GUI that doesn't block the UI.
 
 === Cannot easily create new widgets
 
@@ -169,6 +169,7 @@ fn main() {
 
 Those of you that used Elm can find the similarity between it and `relm`.
 A lot of magic happens in the `#[widget]` attribute.footnote:[Attributes currently requires a nightly compiler.]
+For example, this attribute generate the `struct Win` that contains the GTK+ and relm widgets.
 
 The `view!` macro allows to write the view in a declarative way.
 One can connect a GTK+ signal to send a message using the fat arrow syntax.
