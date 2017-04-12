@@ -433,7 +433,7 @@ That was a short introduction to `relm`.
 Look at the https://github.com/antoyo/relm/tree/master/examples[examples] if you want to learn more.
 The https://github.com/antoyo/relm#relm[readme] and the https://docs.rs/relm/[documentation] also provide details about how to use this crate.
 
-Comments on HackerNews or Reddit.
+Comment on https://www.reddit.com/r/rust/comments/64xmkk/relm_a_gui_library_based_on_gtk_and_futures/[Reddit].
 
 If you find any issue while using this library, please open an https://github.com/antoyo/relm/issues[issue on GitHub].
 
