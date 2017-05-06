@@ -58,7 +58,7 @@ With the GitHub token created, you can now pass it to the Travis command-line to
 
 To encrypt the token and add it to the `.travis.yml` file in your cloned repository:
 
-. Move into the same directory as `env.global`.
+. Move into the same directory as `.travis.yml`.
 . Run the following command, replacing `<token>` with the GitHub token from the previous step.
 
   $ travis encrypt GH_TOKEN=<token> --add env.global
