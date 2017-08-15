@@ -87,3 +87,5 @@ Here's other new features of this release, in bulk:
  Since relm heavily uses code generation, the error message are very bad.
  Relm needs to be updated to use the https://github.com/alexcrichton/proc-macro2[proc-macro2] crate in order to be able to keep the position of the tokens in the generated code.
  This will require a huge refactor because many things changed in the syn crate.
+
+ // Comment on reddit.
