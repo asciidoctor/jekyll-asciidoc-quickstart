@@ -8,7 +8,9 @@ This new release is huge: a lot of changes happened under the hood, the API was 
 The https://github.com/antoyo/titanium[web browser titanium] has been updated to use this latest version of relm.
 The journey has not been without pitfalls and some convenient features of relm were removed because they caused issues.
 
-== Shared model
+== Removed features
+
+=== Shared model
 
 The model is no longer a shared.
 In the previous versions of relm, it was a `Rc<RefCell<Model>>` for convenience:
@@ -17,7 +19,7 @@ However, when developing titanium, I've again got bitten by the infamous borrow 
 Now, there's a single owner to a widget's model and the only way to mutate the model is through its widget:
 if we want to update the model from another widget, we need to send a message to the other widget.
 
-== Synchronous callbacks
+=== Synchronous callbacks
 
 Also, the feature allowing to use synchronous callbacks in an asynchronous way were removed because they do not fit well within the model of relm, where everything is asynchronous.
 While this feature was convenient because it allowed to return a value to a gtk+ callback from within a widget's update method, it was removed because it could cause slowdown if abused and mainly because it was unsound.
@@ -25,12 +27,12 @@ Remember that the update method takes `self` by mutable reference, and with this
 So, if the event was triggered twice, it could be possible to have two `&mut` over the model.
 That's a pretty bad thing that Rust prevents us from doing.
 
-== Networking examples
+=== Networking examples
 
 This release took a long time to be release.
 The reason is that I was waiting for tokio issues to be fixed.
 Since I've been waiting for months and they are still not resolved, I decided to release a version without the examples relying on tokio (the http and websockets examples).
-And they're not likely to be fixed soon since `tokio-proto` is likely to be https://www.reddit.com/r/rust/comments/6s4axu/asynchronous_rust_complaints_suggestions/[de-emphasize] and it's used both by `hyper` and `twist` (the websockets crate).
+And they're not likely to be fixed soon since `tokio-proto` is likely to be https://www.reddit.com/r/rust/comments/6s4axu/asynchronous_rust_complaints_suggestions/dlawxao/[de-emphasize] and it's used both by `hyper` and `twist` (the websockets crate).
 That doesn't mean it's not possible to use tokio:
 titanium uses tokio, but it needs a special version of the tokio-based crate so that the futures can be spawned on the glib event loop.
 In order to be able to use tokio-based crates with relm, they need to be updated to use the new https://docs.rs/futures/newest/futures/executor/trait.Executor.html[Executor trait] instead of relying on the tokio-core `Handle`.
