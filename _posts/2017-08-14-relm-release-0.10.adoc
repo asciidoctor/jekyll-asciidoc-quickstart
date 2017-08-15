@@ -68,14 +68,14 @@ Here's other new features of this release, in bulk:
  * https://github.com/antoyo/relm/commit/39ea6da0bd3649e53344e777e9e6a9ee7c064424[Add support for construct properties.]
  * https://github.com/antoyo/relm/commit/2abbdc775c540cceafc9e3f49745b2a9b6a2f3e1[Log the generated code to help debugging.]
  * https://github.com/antoyo/relm/commit/26e351385d85f10feb39a14c879143c4b502f40c[Add a stream lock to have a way to avoid infinite event emission.]
- * https://github.com/antoyo/relm/commit/263bfb020d3b01e1ed490bedd7c8d5b15edd939f[Allow adding custom methods in the trait annotated by the `#[widget]` attribute: this is useful to have other methods than `update` that modify the model, thus automatically updating the view.]
+ * https://github.com/antoyo/relm/commit/263bfb020d3b01e1ed490bedd7c8d5b15edd939f[Allow adding custom methods in the trait annotated by the widget attribute: this is useful to have other methods than `update` that modify the model, thus automatically updating the view.]
  * https://github.com/antoyo/relm/commit/29a85685dad3a5fb70fc989c7be2be50eab8b954[The model is not a parameter anymore, it is now part of the widget struct.]
  * https://github.com/antoyo/relm/commit/c94c354a3e23527ccfde8e9dc04704ba045afa90[New multi-container feature.]
  * https://github.com/antoyo/relm/commit/49ca37deec56ed5aeb0f818d2dac6799501bd1a8[Add a way to specify additional data to initialize the model.]
  * https://github.com/antoyo/relm/commit/fbf842c14c84fdeaf703cfced3d2203cb0b8e9af[Add support for generic widgets.]
  * https://github.com/antoyo/relm/commit/911c14b39018a8f751c6ac0c3d71cceef7cf0df0[Add support for gtk+ child properties.]
- * https://github.com/antoyo/relm/commit/092ab0606020ae2b0349156e00d29af6b44d5546[Add `init_view()` on the `Widget` trait to be able to execute arbitrary code to update the view when a widget is created: this is useful when using the `view!` macro usable within the `#[widget]` attribute.]
- * No more `Send` bound for the Model and fewer `Clone` bound required.
+ * https://github.com/antoyo/relm/commit/092ab0606020ae2b0349156e00d29af6b44d5546[Add `init_view()` on the `Widget` trait to be able to execute arbitrary code to update the view when a widget is created: this is useful when using the `view!` macro usable within the widget attribute.]
+ * No more `Send` bound for the Model and fewer `Clone` bounds required.
  * Many fixes.
 
 == Need help?
