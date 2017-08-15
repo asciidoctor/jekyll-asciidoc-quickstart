@@ -2,7 +2,7 @@
 :page-navtitle: What's new in relm 0.10.0?
 
 Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+ and tokio.
-See the /relm-intro[introduction article] for details about why this library was created and how to use it.
+See the http://relm.ml/relm-intro[introduction article] for details about why this library was created and how to use it.
 
 This new release is huge: a lot of changes happened under the hood, the API was changed and features that were unsound were removed.
 The https://github.com/antoyo/titanium[web browser titanium] has been updated to use this latest version of relm.
@@ -13,14 +13,14 @@ The journey has not been without pitfalls and some convenient features of relm w
 The model is no longer a shared.
 In the previous versions of relm, it was a `Rc<RefCell<Model>>` for convenience:
 it was possible to share a model with a gtk+ callback for instance.
-However, when developing titanium, I've again got bitten by the infamous borrow mut error at runtime, while this was precisely /relm-intro#state_mutation[one issue] relm tries to solve.
+However, when developing titanium, I've again got bitten by the infamous borrow mut error at runtime, while this was precisely http://relm.ml/relm-intro#state_mutation[one issue] relm tries to solve.
 Now, there's a single owner to a widget's model and the only way to mutate the model is through its widget:
 if we want to update the model from another widget, we need to send a message to the other widget.
 
 == Synchronous callbacks
 
 Also, the feature allowing to use synchronous callbacks in an asynchronous way were removed because they do not fit well within the model of relm, where everything is asynchronous.
-While this feature was convenient, because it allowed to return a value to a gtk+ callback from within a widget's update method, it was removed because it could cause slowdown if abuse and mainly because it was unsound.
+While this feature was convenient because it allowed to return a value to a gtk+ callback from within a widget's update method, it was removed because it could cause slowdown if abused and mainly because it was unsound.
 Remember that the update method takes `self` by mutable reference, and with this feature, it was possible to block an event handling, while it was waiting for the widget to resolve the value to be returned to the gtk+ callback.
 So, if the event was triggered twice, it could be possible to have two `&mut` over the model.
 That's a pretty bad thing that Rust prevents us from doing.
@@ -59,7 +59,7 @@ Here's other new features of this release, in bulk:
  * https://github.com/antoyo/relm/commit/9b83e1ec9f92bd514edcd92b79fa529e3ab120a1[Separate the `Widget` trait into an `Update` trait to be able to use relm in a non-UI context (which in a new relm-state crate).]
  * https://github.com/antoyo/relm/commit/4b086c3ea7bcfb36c11d941f4d335fb85d926009[New `connect_stream!` macro to be used in a non-UI context.]
  * https://github.com/antoyo/relm/commit/aeebe4e8c09affe1f00354a2c2e7fe78828c2edd[Fix to be able to have messages with multiple values.]
- * https://github.com/antoyo/relm/commit/15204e9b41be8db88cc861a236997bbc56ad4b66[Add the ability to use a message as a property in the view (to be able to update another widget's model conveniently, since it is now forbidden to share a widget)]
+ * https://github.com/antoyo/relm/commit/15204e9b41be8db88cc861a236997bbc56ad4b66[Add the ability to use a message as a property in the view (to be able to update another widget's model conveniently since it is now forbidden to share a widget)]
  * https://github.com/antoyo/relm/commit/c5461e8233b76db7f2b5e20f0cee67f0ded66027[New shortcut method to emit a message on a widget.]
  * https://github.com/antoyo/relm/commit/a70ccadc97f7d1d304c9623f8dddd10d45bd5015[Add support for children events.]
  * New https://github.com/antoyo/relm/commit/8068548a6dd04206e2eb76fa1a2b0a103c9ea8e6[`IntoPair`] and https://github.com/antoyo/relm/commit/f4c4a48ee30b8c3aeabdf32a5af949b08416f309[`IntoOption`] traits for more convenience in signal connections.
@@ -76,16 +76,16 @@ Here's other new features of this release, in bulk:
  * No more `Send` bound for the Model and fewer `Clone` bound required.
  * Many fixes.
 
- == Need help?
+== Need help?
 
- If you need help to use relm, there's a https://gitter.im/relm-rs/Lobby[gitter] and I'm also usually on `#gtk-rs`, `#rust-fr` and the GNOME's `#rust` channel.
- You may also open https://github.com/antoyo/relm/issues[an issue on GitHub] to ask questions.
+If you need help to use relm, there's a https://gitter.im/relm-rs/Lobby[gitter] and I'm also usually on `#gtk-rs`, `#rust-fr` and the GNOME's `#rust` channel.
+You may also open https://github.com/antoyo/relm/issues[an issue on GitHub] to ask questions.
 
- == Future
+== Future
 
- Besides many issues to be fixed and corner cases of gtk+ to support in relm, the most important thing to improve is the error messages.
- Since relm heavily uses code generation, the error message are very bad.
- Relm needs to be updated to use the https://github.com/alexcrichton/proc-macro2[proc-macro2] crate in order to be able to keep the position of the tokens in the generated code.
- This will require a huge refactor because many things changed in the syn crate.
+Beside many issues to be fixed and corner cases of gtk+ to support in relm, the most important thing to improve is the error messages.
+Since relm heavily uses code generation, the error message are very bad.
+Relm needs to be updated to use the https://github.com/alexcrichton/proc-macro2[proc-macro2] crate in order to be able to keep the position of the tokens in the generated code.
+This will require a huge refactor because many things changed in the syn crate.
 
- // Comment on reddit.
+// Comment on reddit.
