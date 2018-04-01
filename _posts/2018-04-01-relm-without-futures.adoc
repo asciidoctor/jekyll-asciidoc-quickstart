@@ -1,0 +1,39 @@
+= Relm drop support for futures!
+:page-navtitle: Relm drop support for futures!
+
+[quote, Antoine de Saint-Exupery]
+____
+Un concepteur sait qu’il a atteint la perfection non pas quand il n’y a plus rien à ajouter mais quand il ne reste rien à enlever.
+____
+
+Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+.
+See the http://relm.ml/relm-intro[introduction article] for details about why this library was created and how to use it.
+
+== New release
+
+I've just released relm version 0.14!
+
+This new release, like the previous one, does not provide a bunch of new features, but fix a very important issue:
+it removes the dependency on futures.
+
+The reason for that is to simplify the library.
+Indeed, futures and tokio are generic, abstract libraries that can be quite complex to use.
+Many of the reasons why I decided to drop these crates are explained https://theta.eu.org/2017/08/04/async-rust.html[in this blog article].
+One point that is not mentioned there is that it is incredibly difficult to write a library for a new protocol implemented on top of tokio.
+Why is that? Simply because there's no way to debug issues like why isn't this fd polled except using `strace`.
+
+So, what's the alternative?
+If you don't need async IO, well, you don't need anything and you won't have this extra complexity anymore.
+If you need it, you can use the `gio` async methods https://github.com/antoyo/relm/blob/9b1b527e8b5bdabaa34e37103e6d93e05cb8a8b3/relm-state/src/macros.rs#L129[with one of the `connect_async!` macros].
+The now working https://github.com/antoyo/relm/blob/master/examples/http/src/main.rs#L228-L303[http example] shows how to do that.
+In the next months, I'll work on implementing a few abstractions, as needed, while working on one of my project that needs it.
+The goal is to build a very simple abstraction, that will work nicely with relm, and keep it as simple as possible to avoid the issues we got with `tokio`.
+
+== Conclusion
+
+This new version is the first step in making relm simpler and (as you may have guessed by the quote at the top of this article) you should expect more breaking changes to come that will make this crate even easier to use.
+As always, your feedback is very much appreciated.
+Also, there are https://github.com/antoyo/relm/issues[issues] that could use some love and many of them are tagged as https://github.com/antoyo/relm/issues?q=is%3Aopen+is%3Aissue+label%3Aeasy[easy] if you wish to start with something simple.
+Don't wait to make a difference in the Rust ecosystem!
+
+//Please comment on https://www.reddit.com/r/rust/comments/81upg8/relm_the_idiomatic_gui_library_now_has_better/[Reddit].
