@@ -6,6 +6,7 @@ ____
 Un concepteur sait qu’il a atteint la perfection non pas quand il n’y a plus rien à ajouter mais quand il ne reste rien à enlever.
 ____
 
+
 Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+.
 See the http://relm.ml/relm-intro[introduction article] for details about why this library was created and how to use it.
 
@@ -36,4 +37,4 @@ As always, your feedback is very much appreciated.
 Also, there are https://github.com/antoyo/relm/issues[issues] that could use some love and many of them are tagged as https://github.com/antoyo/relm/issues?q=is%3Aopen+is%3Aissue+label%3Aeasy[easy] if you wish to start with something simple.
 Don't wait to make a difference in the Rust ecosystem!
 
-//Please comment on https://www.reddit.com/r/rust/comments/81upg8/relm_the_idiomatic_gui_library_now_has_better/[Reddit].
+Please comment on https://www.reddit.com/r/rust/comments/88op3r/relm_drop_support_for_futures/[Reddit].
