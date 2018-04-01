@@ -6,6 +6,7 @@ ____
 Un concepteur sait qu’il a atteint la perfection non pas quand il n’y a plus rien à ajouter mais quand il ne reste rien à enlever.
 ____
 
+'''
 
 Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+.
 See the http://relm.ml/relm-intro[introduction article] for details about why this library was created and how to use it.
