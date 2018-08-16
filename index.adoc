@@ -11,7 +11,7 @@ Now that you've set up your website to run with AsciiDoc, you have a ton of opti
 
 === Edit content
 
-Editing content is very simple. The easiest way to update your blog is to clone your repository, fire up your favorite text editor and run the content locally. To do this run the `jekyll serve` command and open a web browser to http://localhost:4000. Jekyll will automatically process and host changes to the content.
+Editing content is very simple. The easiest way to update your blog is to clone your repository, fire up your favorite text editor and run the content locally. To do this run the `jekyll serve` command and open a web browser to http://localhost:4000. Jekyll will automatically process and host changes to the content. Also make sure that your `Gemfile` is up-to-date with the current version of your gem sources, e.g. with `gem list --local | grep "jekyll"`.
 
 You may also edit your content directly on Github. To do this, navigate the browser the file you wish to edit, click the pensil (edit) button in the upper right hand corner of the view and make your changes. When you're finished, commit your changes. This will trigger Travis to generate and publish a new website including your changes.
 

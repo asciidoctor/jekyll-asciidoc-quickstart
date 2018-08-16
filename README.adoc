@@ -88,6 +88,8 @@ If you can load the `[username].github.io/jekyll-asciidoc-quickstart` home page,
 
 Start writing blog posts and enjoy the AsciiDoc difference, regardless of what device you choose: computer, tablet, or mobile.
 
+If would you like to work offline first, consider to check your `Gemfile` for the versions of your gem sources. As the case may be, your `jekyll serve` will fail. So make sure to check your gem sources with `gem list --local | grep "jekyll"`.
+
 = Details
 
 == GitHub Pages and AsciiDoc
