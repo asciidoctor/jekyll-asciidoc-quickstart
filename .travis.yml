@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.2.0
+- 2.2.7
 sudo: false
 before_script:
     - git config --global user.email "bouanto@zoho.com"
