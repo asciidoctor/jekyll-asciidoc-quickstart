@@ -1,11 +1,11 @@
 # Site settings
 title: Relm Blog
 description: "An asynchronous GUI Rust library, based on GTK+ and futures/tokio"
-url: "http://relm.ml"
+url: "https://antoyo.github.io/jekyll-relm-blog/"
 author:
   name: "Antoni Boucher"
   email: "bouanto@zoho.com"
-  url: "http://relm.ml"
+  url: "https://antoyo.github.io/jekyll-relm-blog/"
 exclude:
   - LICENSE.adoc
   - README.adoc

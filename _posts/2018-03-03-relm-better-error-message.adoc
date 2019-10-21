@@ -2,7 +2,7 @@
 :page-navtitle: Relm now has better error messages!
 
 Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+.
-See the http://relm.ml/relm-intro[introduction article] for details about why this library was created and how to use it.
+See the https://antoyo.github.io/jekyll-relm-blog/relm-intro[introduction article] for details about why this library was created and how to use it.
 
 == New release
 
