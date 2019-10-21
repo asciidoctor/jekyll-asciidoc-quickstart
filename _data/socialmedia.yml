@@ -1,0 +1,4 @@
+- name: GitHub
+  url: http://github.com/antoyo/tql
+  class: icon-github
+  title: TQL

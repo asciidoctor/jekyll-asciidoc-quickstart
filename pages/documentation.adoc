@@ -1,0 +1,6 @@
+= Documentation
+:page-layout: page-fullwidth
+:page-permalink: /documentation/
+
+To be done.
+For now, look at the https://github.com/antoyo/tql#tql[readme].

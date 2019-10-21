@@ -1,0 +1,7 @@
+- menu_name: "Links"
+
+- name: "GitHub"
+  url: "https://github.com/antoyo/tql"
+
+- name: "Gitter"
+  url: "https://gitter.im/tql-rs/Lobby"

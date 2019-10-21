@@ -1,0 +1,9 @@
+- menu_name: "News Feed"
+
+- name: "RSS"
+  url: "/feed.xml"
+  title: "Subscribe to RSS Feed"
+
+- name: "Atom"
+  url: "/atom.xml"
+  title: "Subscribe to Atom Feed"
