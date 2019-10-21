@@ -1,5 +1,6 @@
 = Relm, a GUI library, based on GTK+ and futures, written in Rust
 :page-navtitle: Relm, a GUI library, based on GTK+ and futures, written in Rust
+:page-layout: page-fullwidth
 
 Relm is a new crate (Rust library) to develop asynchronous GUI applications in Rust.
 
