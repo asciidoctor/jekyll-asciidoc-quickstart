@@ -24,7 +24,7 @@ asciidoctor:
     icons: font
 
 # Build settings
-baseurl:
+baseurl: /jekyll-relm-blog
 source: .
 destination: ./_site
 permalink: /:title
