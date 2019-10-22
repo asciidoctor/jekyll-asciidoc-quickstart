@@ -13,9 +13,9 @@ exclude:
   - Gemfile.lock
   - Rakefile
 asciidoc: {}
+asciidoctor-enabled: true
 asciidoctor:
-  base_dir: :docdir
-  safe: unsafe
+  description: asciidoctor
   attributes:
     source-highlighter: pygments
     pygments-css: class
