@@ -5,4 +5,3 @@
 *.bundle
 Gemfile.lock
 .sass-cache/
-css/asciidoc-pygments.css
