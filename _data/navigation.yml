@@ -9,6 +9,11 @@
 - title: Documentation
   url: "/documentation/"
   side: left
+  dropdown:
+  - title: "Tutorial"
+    url: "/documentation/tutorial/"
+  - title: "Reference"
+    url: "/documentation/reference/"
 
 - title: Blog
   url: "/blog/"

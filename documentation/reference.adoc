@@ -1,0 +1,6 @@
+= Reference
+:page-layout: page-fullwidth
+:page-permalink: /documentation/reference/
+
+To be done.
+For now, look at the https://github.com/antoyo/relm[readme].
