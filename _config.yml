@@ -1,7 +1,7 @@
 # Site settings
 title: Relm Blog
 description: "An asynchronous GUI Rust library, based on GTK+ and futures/tokio"
-url: "https://antoyo.github.io/jekyll-relm-blog/"
+url: "https://antoyo.github.io/"
 author:
   name: "Antoni Boucher"
   email: "bouanto@zoho.com"
@@ -24,7 +24,7 @@ asciidoctor:
     icons: font
 
 # Build settings
-baseurl: /jekyll-relm-blog
+baseurl: jekyll-relm-blog
 source: .
 destination: ./_site
 permalink: /:title
