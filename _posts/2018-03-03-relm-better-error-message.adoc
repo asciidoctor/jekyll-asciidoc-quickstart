@@ -4,7 +4,7 @@
 :page-liquid:
 
 Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+.
-See the {{ site.baseurl }}/relm-intro[introduction article] for details about why this library was created and how to use it.
+See the link:{{ site.baseurl }}/relm-intro[introduction article] for details about why this library was created and how to use it.
 
 == New release
 
