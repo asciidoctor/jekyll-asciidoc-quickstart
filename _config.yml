@@ -17,12 +17,11 @@ asciidoctor:
   base_dir: :docdir
   safe: unsafe
   attributes:
-    - idseparator=_
-    - source-highlighter=pygments
-    - pygments-css=class
-    - pygments-style=monokai
-    - pygments-stylesheet=css/asciidoc-pygments.css
-    - icons=font
+    source-highlighter: pygments
+    pygments-css: class
+    pygments-style: monokai
+    pygments-stylesheet: css/asciidoc-pygments.css
+    icons: font
 
 # Build settings
 baseurl:
