@@ -1,4 +1,4 @@
-= Documentation
+= Tutorial
 :page-layout: page-fullwidth
 :page-permalink: /documentation/tutorial/
 
