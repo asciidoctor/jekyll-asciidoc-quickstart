@@ -13,7 +13,7 @@ widget1:
   text: 'Relm provides a very intuitive declarative syntax to create GUI applications and shows good error messages similar to the ones emitted by the compiler itself.'
 widget2:
   title: "Efficient"
-  url: '/documentation#code-generation'
+  url: '/documentation'
   text: 'Relm generates the same gtk-rs code you would write by hand.'
 widget3:
   title: "Easy to learn"
