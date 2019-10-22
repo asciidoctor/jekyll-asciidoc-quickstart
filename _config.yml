@@ -14,7 +14,7 @@ title: Relm Blog
 slogan: 'An easy-to-use ORM from Rust'
 
 # The description is used on homepage and in the footer to quickly describe your website. Use a maximum of 150 characters for SEO-purposes.
-description: "An asynchronous GUI Rust library, based on GTK+ and futures/tokio"
+description: "An idiomatic GUI Rust library, based on GTK+"
 
 # Main author of the website
 # See > authors.yml
@@ -22,8 +22,8 @@ author: antoyo
 
 # This URL is the main address for absolute links. Don't include a slash at the end.
 #
-url: "https://antoyo.github.io/jekyll-relm-blog/"
-baseurl:
+url: "https://antoyo.github.io"
+baseurl: /jekyll-relm-blog
 
 # This URL points directly to the images directory making
 # things easier to link to images in posts and templates. It needs a slash at the end.
