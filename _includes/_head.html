@@ -3,13 +3,11 @@
 #   Liquid variables are created at the top to keep the source DRY and clean.
 #   Idea by ericcarlisle.com
 #
-#   Variables › {{ url }} › site.url + site.baseurl
 #   Variables › {{ description }} › excerpt, page.meta_description, or site.description
 #   Variables › {{ title }} › page.title
 #
 {% endcomment %}{% capture ignore %}
 
-{% assign url = site.baseurl | prepend: site.url %}
 
 {% capture description %}{% if page.meta_description %}{{ page.meta_description }}{% elsif page.teaser %}{{ page.teaser }}{% elsif page.excerpt %}{{ page.excerpt }}{% elsif site.description %}{{ site.description }}{% endif %}{% endcapture %}
 {% assign description = description | strip_html | escape | strip %}
@@ -22,16 +20,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
 
-    <link rel="stylesheet" type="text/css" href="{{ url }}/assets/css/styles_feeling_responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/styles_feeling_responsive.css">
 
     <!-- Search Engine Optimization -->
     <meta name="description" content="{{ description }}">
     {% if page.noindex == true or layout.noindex == true %}<meta name="robots" content="noindex">{% endif %}
-    <link rel="canonical" href="{{ url }}{{ page.url }}">
+    <link rel="canonical" href="{{ site.baseurl }}{{ page.url }}">
 
-    <link rel="stylesheet" href="{{ url }}/css/asciidoc-pygments.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/asciidoc-pygments.css">
 
-    <link type="text/plain" rel="author" href="{{ url}}/humans.txt">
+    <link type="text/plain" rel="author" href="{{ site.baseurl}}/humans.txt">
 
     {% include _favicon.html %}
 
