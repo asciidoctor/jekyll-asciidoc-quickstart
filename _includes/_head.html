@@ -29,7 +29,7 @@
     {% if page.noindex == true or layout.noindex == true %}<meta name="robots" content="noindex">{% endif %}
     <link rel="canonical" href="{{ url }}{{ page.url }}">
 
-    <link rel="stylesheet" href="{{ "/css/asciidoc-pygments.css" | prepend: site.baseurl }}">
+    <link rel="stylesheet" href="{{ url }}/css/asciidoc-pygments.css"">
 
     <link type="text/plain" rel="author" href="{{ url}}/humans.txt">
 
