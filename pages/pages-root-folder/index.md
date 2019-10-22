@@ -10,15 +10,15 @@ header:
 widget1:
   title: "Easy to use"
   url: '/getting-started/'
-  text: 'TQL provides a very intuitive Rust-like syntax to do SQL queries and shows good error messages similar to the ones emitted by the compiler itself.'
+  text: 'Relm provides a very intuitive declarative syntax to create GUI applications and shows good error messages similar to the ones emitted by the compiler itself.'
 widget2:
   title: "Efficient"
   url: '/documentation#code-generation'
-  text: 'TQL generates the SQL queries at compile-time and thus checks that the good types and identifiers are used at the same time.'
+  text: 'Relm generates the same gtk-rs code you would write by hand.'
 widget3:
   title: "Easy to learn"
   url: '/documentation/'
-  text: 'There are extensive resources and examples (not yet) to learn how to use tql.'
+  text: 'There are extensive resources and examples (not yet) to learn how to use relm.'
 #
 # Use the call for action to show a button on the frontpage
 #
@@ -31,7 +31,7 @@ widget3:
 #
 callforaction:
   url: /getting-started/
-  text: Start using TQL now ›
+  text: Start using Relm now ›
   style: info
 permalink: /index.html
 #

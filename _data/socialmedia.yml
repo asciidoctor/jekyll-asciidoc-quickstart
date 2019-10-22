@@ -1,4 +1,4 @@
 - name: GitHub
-  url: http://github.com/antoyo/tql
+  url: http://github.com/antoyo/relm
   class: icon-github
-  title: TQL
+  title: Relm

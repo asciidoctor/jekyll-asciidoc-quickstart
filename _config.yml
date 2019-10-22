@@ -178,7 +178,7 @@ sass:
 
 asciidoctor-enabled: true
 asciidoctor:
-  description: testtewtetrue
+  description: asciidoctor
   attributes:
     source-highlighter: pygments
     pygments-css: class
