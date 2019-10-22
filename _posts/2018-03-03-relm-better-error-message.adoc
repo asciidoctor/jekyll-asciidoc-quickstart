@@ -1,6 +1,7 @@
 = Relm now has better error messages!
 :page-navtitle: Relm now has better error messages!
 :page-layout: page-fullwidth
+:page-liquid:
 
 Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+.
 See the {{ site.baseurl }}/relm-intro[introduction article] for details about why this library was created and how to use it.
