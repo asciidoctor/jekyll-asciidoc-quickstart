@@ -1,6 +1,7 @@
 = Relm drop support for futures!
 :page-navtitle: Relm drop support for futures!
 :page-layout: page-fullwidth
+:page-liquid:
 
 [quote, Antoine de Saint-Exupery]
 ____
@@ -10,7 +11,7 @@ ____
 '''
 
 Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+.
-See the https://antoyo.github.io/jekyll-relm-blog/relm-intro[introduction article] for details about why this library was created and how to use it.
+See the link:{{ site.baseurl }}/relm-intro[introduction article] for details about why this library was created and how to use it.
 
 == New release
 

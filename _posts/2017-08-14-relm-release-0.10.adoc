@@ -1,9 +1,10 @@
 = What's new in relm 0.10.0?
 :page-navtitle: What's new in relm 0.10.0?
 :page-layout: page-fullwidth
+:page-liquid:
 
 Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+ and tokio.
-See the https://antoyo.github.io/jekyll-relm-blog/relm-intro[introduction article] for details about why this library was created and how to use it.
+See the link:{{ site.baseurl }}/relm-intro[introduction article] for details about why this library was created and how to use it.
 
 This new release is huge: a lot of changes happened under the hood, the API was changed and features that were unsound were removed.
 The https://github.com/antoyo/titanium[web browser titanium] has been updated to use this latest version of relm.
@@ -16,7 +17,7 @@ The journey has not been without pitfalls and some convenient features of relm w
 The model is no longer a shared.
 In the previous versions of relm, it was a `Rc<RefCell<Model>>` for convenience:
 it was possible to share a model with a gtk+ callback for instance.
-However, when developing titanium, I've again got bitten by the infamous borrow mut error at runtime, while this was precisely https://antoyo.github.io/jekyll-relm-blog/relm-intro#state_mutation[one issue] relm tries to solve.
+However, when developing titanium, I've again got bitten by the infamous borrow mut error at runtime, while this was precisely link:{{ site.baseurl }}/relm-intro#state-mutation[one issue] relm tries to solve.
 Now, there's a single owner to a widget's model and the only way to mutate the model is through its widget:
 if we want to update the model from another widget, we need to send a message to the other widget.
 
