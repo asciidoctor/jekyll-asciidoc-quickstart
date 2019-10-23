@@ -23,14 +23,22 @@ Next, add these imports to the file `src/main.rs`:
 
 [source,rust]
 ----
-use gtk::prelude::*;
-use gtk::{Inhibit, Orientation::Vertical};
+use gtk::{
+    ButtonExt,
+    Inhibit,
+    LabelExt,
+    OrientableExt,
+    WidgetExt,
+};
+use gtk::Orientation::Vertical;
 
 use relm::Widget;
 use relm_derive::{Msg, widget};
 ----
 
-Then, create your model:
+Let's create a window with a counter that you can increment and
+decrement by pressing buttons.
+To do so, we'll need to store the counter in the model:
 
 [source,rust]
 ----

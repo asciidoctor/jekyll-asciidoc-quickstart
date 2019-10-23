@@ -1,0 +1,5 @@
+= Text field example
+:page-navtitle: Text field example
+
+
+The complete code for this tutorial is https://github.com/antoyo/relm/blob/master/relm-examples/examples/text-fields-attribute.rs[here].

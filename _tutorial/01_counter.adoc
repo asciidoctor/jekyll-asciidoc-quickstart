@@ -1,5 +1,5 @@
-= Counter Example
-:page-navtitle: Counter Example
+= Counter example
+:page-navtitle: Counter example
 
 In the link:{{ site.baseurl }}/getting-started[Getting started] page,
 we briefly saw how to create a counter application.
@@ -227,3 +227,5 @@ fn update(&mut self, event: Msg) {
 It's all there is to know about this example. The next tutorial go
 into more details about the syntax of the `view!` macro and event
 parameters.
+
+The complete code for this tutorial is https://github.com/antoyo/relm/blob/master/relm-examples/examples/buttons-attribute.rs[here].
