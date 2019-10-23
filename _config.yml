@@ -187,4 +187,5 @@ asciidoctor:
     icons: font
 
 collections:
-    - tutorial
+    tutorial:
+        output: true

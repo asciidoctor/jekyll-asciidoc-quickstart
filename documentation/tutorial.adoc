@@ -2,3 +2,7 @@
 :page-layout: page-fullwidth
 :page-permalink: /documentation/tutorial/
 
+{% for page in site.tutorial %}
+    {{ page.url }}
+    <p>{{ page.content }}</p>
+{% endfor %}
