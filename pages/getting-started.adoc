@@ -99,7 +99,7 @@ Next, we'll create the view:
 This code describe the view.
 There's a lot going on here:
 the root widget is a `gtk::Window` and contains a `gtk::Box`, which
-contains `gtk::Button`s and a `gtk::Label`.
+contains `gtk::Button` and a `gtk::Label`.
 The most important for now is how we declare properties, connect
 events and create bindings.
 
