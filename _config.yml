@@ -185,7 +185,7 @@ asciidoctor:
     pygments-style: monokai
     pygments-stylesheet: css/asciidoc-pygments.css
     icons: font
-    #page-liquid:
+    page-liquid: true
     page-layout: page-fullwidth
 
 collections:
