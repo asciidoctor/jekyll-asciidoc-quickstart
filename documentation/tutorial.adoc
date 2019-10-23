@@ -1,9 +1,6 @@
 = Tutorial
-:page-layout: page-fullwidth
 :page-permalink: /documentation/tutorial/
-:page-liquid:
 
 {% for page in site.tutorial %}
-    {{ page.url }}
-    <p>{{ page.content }}</p>
+    <p><a href="{{ page.url }}">{{ page.title }}</a></p>
 {% endfor %}
