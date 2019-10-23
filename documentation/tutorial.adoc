@@ -1,5 +1,6 @@
 = Tutorial
 :page-permalink: /documentation/tutorial/
+:page-layout: page-fullwidth
 
 {% for page in site.tutorial %}
     link:{{ page.url }}[{{ page.title }}]
