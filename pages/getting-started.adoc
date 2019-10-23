@@ -2,5 +2,172 @@
 :page-layout: page-fullwidth
 :page-permalink: /getting-started/
 
-To be done.
-For now, look at the https://github.com/antoyo/relm[readme].
+== Installation Requirements
+
+Since relm is based on GTK+, you need this library on your system in order to use it.
+
+See http://gtk-rs.org/docs-src/requirements[this page] for information on how to install GTK+.
+
+== Usage
+
+Create a new project with `cargo new` and add this to your
+`Cargo.toml` under the `[dependencies]` group:
+
+[source,toml]
+----
+gtk = "0.7.0"
+relm = "0.18.0"
+relm-derive = "0.18.0"
+----
+
+Next, add these imports to the file `src/main.rs`:
+
+[source,rust]
+----
+use gtk::prelude::*;
+use gtk::{Inhibit, Orientation::Vertical};
+
+use relm::Widget;
+use relm_derive::{Msg, widget};
+----
+
+Then, create your model:
+
+[source,rust]
+----
+pub struct Model {
+    counter: i32,
+}
+----
+
+The model contains the data related to a `Widget`. It may be updated by the `Widget::update` function.
+
+Now, create your message `enum`:
+
+[source,rust]
+----
+#[derive(Msg)]
+pub enum Msg {
+    Decrement,
+    Increment,
+    Quit,
+}
+----
+
+Messages are sent to `Widget::update` to indicate that an event happened. The model can be updated when an event is received.
+
+It is time to create the widget itself.
+We'll start by implementing the `model()` method which provides the
+initial value of the model:
+
+[source,rust]
+----
+#[widget]
+impl Widget for Win {
+    fn model() -> Model {
+        Model {
+            counter: 0,
+        }
+    }
+----
+
+Next, we'll create the view:
+
+[source,rust]
+----
+    view! {
+        gtk::Window {
+            gtk::Box {
+                orientation: Vertical,
+                gtk::Button {
+                    clicked => Msg::Increment,
+                    label: "+",
+                },
+                gtk::Label {
+                    text: &self.model.counter.to_string(),
+                },
+                gtk::Button {
+                    clicked => Msg::Decrement,
+                    label: "-",
+                },
+            },
+            delete_event(_, _) => (Msg::Quit, Inhibit(false)),
+        }
+    }
+----
+
+This code describe the view.
+There's a lot going on here:
+the root widget is a `gtk::Window` and contains a `gtk::Box`, which
+contains `gtk::Button`s and a `gtk::Label`.
+The most important for now is how we declare properties, connect
+events and create bindings.
+
+In the button, we set the value of a property to a static value:
+
+[source,rust]
+----
+gtk::Button {
+    label: "+",
+}
+----
+
+This is equivalent to doing the following in plain `gtk-rs`:
+
+[source,rust]
+----
+button.set_label("+");
+----
+
+In the same button, we connect an event to send a message:
+
+[source,rust]
+----
+gtk::Button {
+    clicked => Msg::Increment,
+}
+----
+
+This means that whenever the button is clicked, the message
+`Msg::Increment` will be sent to the `update()` method.
+
+Also, we create a binding between a property and a model field:
+
+[source,rust]
+----
+gtk::Label {
+    text: &self.model.counter.to_string(),
+}
+----
+
+This means that whenever the `counter` attribute is updated, the text
+of the label will be updated as well.
+
+Finally, we'll implement the `update()` method:
+
+[source,rust]
+----
+    fn update(&mut self, event: Msg) {
+        match event {
+            Msg::Decrement => self.model.counter -= 1,
+            Msg::Increment => self.model.counter += 1,
+            Msg::Quit => gtk::main_quit(),
+        }
+    }
+}
+----
+
+The `#[widget]` attribute will change this code so that assignment to
+model fields will also update the view.
+
+We're now ready to launch this application:
+
+[source,rust]
+----
+fn main() {
+    Win::run(()).unwrap();
+}
+----
+
+Run this program with `cargo run` and you'll see a window where
+clicking on buttons will change the counter you see in it.
