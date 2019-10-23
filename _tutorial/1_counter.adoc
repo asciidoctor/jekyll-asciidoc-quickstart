@@ -1,0 +1,5 @@
+= Counter Example
+
+In the link:{{ site.baseurl }}/getting-started[Getting started] page,
+we briefly saw how to create a counter application.
+Now, let's describe more in details what is going on under the hood.
