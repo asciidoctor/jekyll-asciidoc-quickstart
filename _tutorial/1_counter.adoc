@@ -4,3 +4,226 @@
 In the link:{{ site.baseurl }}/getting-started[Getting started] page,
 we briefly saw how to create a counter application.
 Now, let's describe more in details what is going on under the hood.
+
+Let's look again at the view, since it is where the most magic
+happens:
+
+[source,rust]
+----
+    view! {
+        gtk::Window {
+            gtk::Box {
+                orientation: Vertical,
+                gtk::Button {
+                    clicked => Msg::Increment,
+                    label: "+",
+                },
+                gtk::Label {
+                    text: &self.model.counter.to_string(),
+                },
+                gtk::Button {
+                    clicked => Msg::Decrement,
+                    label: "-",
+                },
+            },
+            delete_event(_, _) => (Msg::Quit, Inhibit(false)),
+        }
+    }
+----
+
+== Event handling
+
+It was described that the following connects an event to a signal:
+
+[source,rust]
+----
+gtk::Button {
+    clicked => Msg::Increment,
+}
+----
+
+But how does that work and what is `clicked`?
+
+This will actually be converted to the following:
+
+[source,rust]
+----
+connect!(relm, plus_button, connect_clicked(_), Msg::Increment);
+----
+
+where `connect!` is a macro defined by `relm` as well and will be
+converted to something like:
+
+[source,rust]
+----
+let stream = relm.stream.clone();
+plus_button.connect_clicked(move |_| {
+    stream.emit(Msg::Increment);
+});
+----
+
+which looks more like regular `gtk-rs` code, the library on which
+`relm` is based.
+So, `connect_clicked` actually comes from http://gtk-rs.org/docs/gtk/trait.ButtonExt.html#tymethod.connect_clicked[gtk-rs].
+`relm` will take the event mentioned in the macro (`clicked`) and
+precedes it by `connect_`.
+
+Later in the view, we have a more complicated example of event
+handling:
+
+[source,rust]
+----
+gtk::Window {
+    // ...
+    delete_event(_, _) => (Msg::Quit, Inhibit(false)),
+}
+----
+
+Here, we are not only sending a message (`Msg::Quit`), but also
+returning a value (`Inhibit(false)`) from the callback.
+We return a value because it is what is required by the original
+http://gtk-rs.org/docs/gtk/trait.WidgetExt.html#tymethod.connect_delete_event[`connect_delete_event` method].
+So, the syntax is:
+
+[source,rust]
+----
+event_name => (message_to_send, value_to_return)
+----
+
+Another difference here is the `(_, _)` after the event name.
+This is because the `connect_delete_event` method takes a callback
+with two parameters.
+We don't need it here, but we could use the value from these
+parameters.
+We'll talk more about that later.
+
+The reason why we didn't have that for the other events is that `relm`
+will assume there's one parameter by default.
+So, the following:
+
+[source,rust]
+----
+clicked => Msg::Increment
+----
+
+is the same as:
+
+[source,rust]
+----
+clicked(_) => Msg::Increment
+----
+
+== Bindings
+
+Like properties, a binding will generate an initial call to `set_*`.
+For instance, the following code:
+
+[source,rust]
+----
+gtk::Label {
+    text: &self.model.counter.to_string(),
+}
+----
+
+will first generate a call to:
+
+
+[source,rust]
+----
+label.set_text(&self.model.counter.to_string());
+----
+
+using a similar logic as before: `relm` will prepend `set_` to the
+property specified by the user (here `text`).
+
+But since it is a binding, `relm` will also change the code of the
+`update()` method so that changes to the model field it is bound to
+(i.e. `counter`) update the view as well.
+
+So, the following method:
+
+[source,rust]
+----
+fn update(&mut self, event: Msg) {
+    match event {
+        Msg::Decrement => self.model.counter -= 1,
+        Msg::Increment => self.model.counter += 1,
+        Msg::Quit => gtk::main_quit(),
+    }
+}
+----
+
+will be converted to something like:
+
+[source,rust]
+----
+fn update(&mut self, event: Msg) {
+    match event {
+        Msg::Decrement => {
+            self.model.counter -= 1;
+            label.set_text(&self.model.counter.to_string());
+        },
+        Msg::Increment => {
+            self.model.counter += 1;
+            label.set_text(&self.model.counter.to_string());
+        },
+        Msg::Quit => gtk::main_quit(),
+    }
+}
+----
+
+== Code generation
+
+This code generation is actually pretty dump.
+There are two cases to be aware of.
+
+The first one is that the call to the setter method is done right
+after the model field is updated, so the following code:
+
+[source,rust]
+----
+fn update(&mut self, event: Msg) {
+    for _ in 0..100 {
+        self.model.counter += 1;
+    }
+}
+----
+
+will be converted to:
+
+[source,rust]
+----
+fn update(&mut self, event: Msg) {
+    for _ in 0..100 {
+        self.model.counter += 1;
+        self.label1.set_text(&self.model.counter.to_string());
+    }
+}
+----
+
+So your code can be inefficient if used this way.
+
+Second, only assignment to a field of the model will update the view:
+calling a mutable method on a model field won't work as expected.
+
+So, instead of doing the following:
+
+[source,rust]
+----
+fn update(&mut self, event: Msg) {
+    self.model.text.push_str("Text");
+}
+----
+
+you will need to do something else, like:
+
+[source,rust]
+----
+fn update(&mut self, event: Msg) {
+    self.model.text += "Text";
+}
+----
+
+It's all there is to know about this example. The next tutorial go
+into more details about the syntax of the `view!` macro and event
+parameters.

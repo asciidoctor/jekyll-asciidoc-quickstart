@@ -5,3 +5,4 @@
 *.bundle
 Gemfile.lock
 .sass-cache/
+.jekyll-cache
