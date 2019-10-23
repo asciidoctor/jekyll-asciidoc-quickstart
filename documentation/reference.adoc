@@ -1,5 +1,4 @@
 = Reference
-:page-layout: page-fullwidth
 :page-permalink: /documentation/reference/
 
 To be done.

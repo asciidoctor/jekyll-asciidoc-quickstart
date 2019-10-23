@@ -2,5 +2,6 @@
 :page-permalink: /documentation/tutorial/
 
 {% for page in site.tutorial %}
-    <p><a href="{{ page.url }}">{{ page.title }}</a></p>
+    link:{{ page.url }}[{{ page.title }}]
+
 {% endfor %}

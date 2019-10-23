@@ -1,7 +1,5 @@
 = What's new in relm 0.10.0?
 :page-navtitle: What's new in relm 0.10.0?
-:page-layout: page-fullwidth
-:page-liquid:
 
 Relm is an attempt to do an idiomatic GUI library in Rust, based on gtk+ and tokio.
 See the link:{{ site.baseurl }}/relm-intro[introduction article] for details about why this library was created and how to use it.

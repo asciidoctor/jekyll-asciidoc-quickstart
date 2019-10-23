@@ -1,5 +1,4 @@
 = Getting Started
-:page-layout: page-fullwidth
 :page-permalink: /getting-started/
 
 == Installation Requirements

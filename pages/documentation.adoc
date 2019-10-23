@@ -1,5 +1,4 @@
 = Documentation
-:page-layout: page-fullwidth
 :page-permalink: /documentation/
 
 To be done.
