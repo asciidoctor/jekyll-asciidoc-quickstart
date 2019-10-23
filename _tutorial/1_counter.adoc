@@ -1,4 +1,7 @@
 = Counter Example
+:page-navtitle: Counter Example
+:page-layout: page-fullwidth
+:page-liquid:
 
 In the link:{{ site.baseurl }}/getting-started[Getting started] page,
 we briefly saw how to create a counter application.
