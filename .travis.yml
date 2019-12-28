@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.2.7
+- 2.5.3
 sudo: false
 script: bundle exec jekyll build && bundle exec rake deploy
 addons:
