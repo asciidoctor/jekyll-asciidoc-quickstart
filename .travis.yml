@@ -2,7 +2,11 @@ language: ruby
 rvm:
 - 2.2.7
 sudo: false
-script: bundle exec rake deploy
+script: bundle exec jekyll build && bundle exec rake deploy
+addons:
+  apt:
+    packages:
+    - graphviz
 env:
   global:
     secure: JNgDbQyNVISKC2gX+XCDVqJXLoqsMlEC7JWdgSHtFk6eGLV1ZBgAqfsvtVBbY70yoaRXMYQdtLfjtK2pmnepaAtDfdTdt6MOA9EImCGDeIqcqA00iusEnKAY0gkrGFAK9e7KTb5UjEIguRqmtkASIaKENzuNHdqhf7hcx2wP5vBBewZFWkmspKYIZJfvrTYTA8+nBnX5929oN4PEHpSHH2H4Hv5natgoL8in1ff8DSzhfDeGJTkxSCuICRmXkzsblXyaB3J2sZO8BKrVUPsWppzW5bgXrUS9CWKTsc8pazt1BmyJMWrSfl68q55ZNgc1vD3kuYe33pm4vAOU0AowX+u93D2pJAC7qXJTiSvbzi2sYwI5uvxx+zMt1Qpy4Ja0QO1BgozTgtZ3tIePQPH67AKIdueSt5huLrBUZd26FLePHsM+FjaAwVcP5j/B9ICY/ReFekwQ0szm7FfXy7s5g/7YWdcUOZBf2GUejYU3GPRR8FQ80wUcCiAw/AtpdUIQq9Y6crksTsPwjiCul71KECVFkm84T0RIcwqqOw/qKO4HWfXiMjDR7pX5wXQ/wD/sgU6DLhON8zVn67gf/ze51zGEySM5U+yTeoliuvZHGamN+jVP0k8Cd/Qh8AzdL+A9BEfpTv051w+oYV+CtwO6jFA0kpa5VYd1i8PVudd10W8=
