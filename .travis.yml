@@ -1,7 +1,18 @@
 language: ruby
+
 rvm:
 - 2.2
 - jruby
+
+pages:
+  script:
+    - gem install bundler
+    - bundle install
+    - bundle exec jekyll build -d public
+  artifacts:
+    paths:
+      - public
+
 env:
   global:
     secure: tgddg/qfrl4gUDUML7mSzy038tKndOyfg+CpxOxffZdzKUnWIyEGaHyalbHwWLdSkIuL8H34/nEGnPwQXDE0kvAftJEv35zgA82FTIblH8YzPcvdmb0l3ocCczAL1cPi4Lo501+Ted/6A9lNO4CcSl+kYqL4iP1xcmnhQz1xMzMFhtbzrpzzGD1wknGrwlSZAxpiahnPHLZiAubYTDL4uD7gbImPrzOwbJOlhg6FxOQv3oEzF0R9uspGlHZPohw34aMYdd6qmFITyU/2Tn+TRu77LYPwVti/NBd6Xu2ZcKl0UOOKGK8spQrhEsxniuHkgbpwX4wok5Va+/8mRnd+RNtXNEek6G88uQuBgC6GIQAY39infqn9l5+dKSN1/gskrhtTWMIwErNPgDuOX4UqF3c291s5/EHIroBWfKLajwbMd+Sn87VlDITeXWXvRPvsc+BTxPTmnS0dhTcGpNDz+m9i1ybt9KZoF2id3N1/Easidhdl5aLsAYTT7da3BMiXSn48CSRnxHY352FW//r0k/YGqvnUWEVwauM140TB3nb6r4KYEoe0c2+1o7drtSkf7UzACgMzLLZIrULe3qiRbujGz8RJZAG1ds6QYSTEPyqD9vsOTJtNv8wESeU2YkcY0nBnu5PyMQBkP1PLpMMbUPFvRwkMQG917P0jgtNJ6/4=
