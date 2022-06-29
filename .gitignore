@@ -3,3 +3,4 @@
 /.bundle/
 /tmp/
 *.bundle
+.jekyll-cache/
