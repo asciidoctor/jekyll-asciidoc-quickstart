@@ -1,5 +1,5 @@
 = Jekyll AsciiDoc Quickstart
-:toc:
+ifndef::env-github[:toc:]
 
 The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.  This project combines the power of AsciiDoc with a beautiful CSS framework and blog-ready template on top of GitHub's existing publishing infrastructure.
 
