@@ -44,10 +44,3 @@ This way, we won't need a GitHub Action workflow anymore to publish AsciiDoc web
 Tell the GitHub team that you want the choice to write in AsciiDoc, and have it handled the same way Markdown is when pushed to your GitHub Page.
 
 Your voice counts: make it heard!
-
-== Repository Structure
-
-The repository requires the following structure to work correctly:
-
-* **master**, for markup sources and configuration. This branch can be named anything you choose, however **master** is a general standard used in Jekyll blogs.
-* **gh-pages**, for the generated static content produced by Travis CI. This branch is the username.github.io GitHub Pages domain, which is created automatically for you when the Travis CI job runs.
