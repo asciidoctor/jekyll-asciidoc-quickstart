@@ -1,112 +1,50 @@
 = Jekyll AsciiDoc Quickstart
-:toc:
+ifndef::env-github[:toc:]
 
-The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.  This project combines the power of AsciiDoc with a beautiful CSS framework and blog-ready template on top of GitHub's existing publishing infrastructure.
+The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub and GitHub Pages with content based in AsciiDoc.
+This project combines the power of AsciiDoc with a beautiful CSS framework and blog-ready template on top of GitHub's existing publishing infrastructure.
+
+This project provides a GitHub Action workflow that republishes your website when changes are pushed to the repository.
+The workflow watches for commits on the `master` or `main` branch, automatically runs the Jekyll build, and pushes the generated content to the `gh-pages` branch.
 
 == Directions
 
-The goal of this procedure set is to configure a Travis CI job to listen for commits on the _master_ branch, automatically run the Jekyll build, and push the generated content to the _gh-pages_ branch.
+=== Fork this Repository and Configure GitHub Pages
 
-=== {counter:directions}. Install Minimum Jekyll Requirements
+. Click the Fork button in the upper right corner of GitHub to create your own copy of this repository.
+. After the fork is completed and you're redirected to your own repository copy:
+.. Access the Settings tab, then the Pages menu on the left.
+.. In the source field, select the `gh-pages` branch to be the source of the website files (this branch is where the Jekyll build will place the generated files). 
+.. Finally, click the Save button and return to your respository home.
 
-You must install some software to execute commands in subsequent procedures. The Requirements on the http://jekyllrb.com/docs/installation/[Jekyll Installation] page describe how to install both ruby and rubygems.
+=== Verify the Build/Publish
 
-For yum-based package managers, the command to run is:
+After every push, the GitHub Action workflow is automatically started to build and publish your website.
+That takes a while.
+You can look for ✅ at the top of your repository home page.
 
-  $ sudo yum install ruby rubygems
-
-=== {counter:directions}. Install Travis Gem
-
-When you install rubygems, you can use the gem internal package management system to install the Travis CI gem. This gem contains--among other things--a command-line tool for easily encrypting GitHub tokens.
-
-Run the following command to install the Travis gem:
-
-  $ gem install travis
-
-=== {counter:directions}. Fork this Repository and Clone
-
-To create your own copy of this repository, start by clicking the fork button in the upper right corner of the GitHub page.
-
-Next, open a command line window and make a clone of your new repository:
-
-  $ git clone https://github.com/YOUR-USERNAME/jekyll-asciidoc-quickstart
-
-=== {counter:directions}. Enable Travis CI
-
-Travis CI is configured initially through a browser.
-
-To activate Travis CI for the Repository:
-
-. Open https://travis-ci.org and create an account.
-. Open your https://travis-ci.org/profile/[profile page] on Travis.
-. Find the Jekyll repository, and turn on the switch.
-. Click on repository settings (next to the switch) and enable “Build only if .travis.yml is present.”
-
-=== {counter:directions}. Generate a GitHub Personal Access Token
-
-Once the repository is activated in Travis, you need a GitHub token to pass into the Travis keytool.
-
-To generate a new personal access token on GitHub:
-
-. Open https://github.com/settings/tokens/new.
-. Select the scope _public_repository_, and add a terse description.
-. Confirm and save the settings.
-
-=== {counter:directions}. Encrypt the GitHub Token for Travis CI
-
-With the GitHub token created, you can now pass it to the Travis command-line tool, which adds the encrypted value to a file in your repository.
-
-To encrypt the token and add it to the `.travis.yml` file in your cloned repository:
-
-. Move into the same directory as `.travis.yml`.
-. Run the following command, replacing `<token>` with the GitHub token from the previous step.
-
-  $ travis encrypt GH_TOKEN=<token> --add env.global
-
-. Verify the script added the `secure` global environment variable to `.travis.yml`:
-+
-[source, yaml]
-----
-env:
-  global:
-    secure: [YOUR-ENCRYPTED-TOKEN]
-----
-+
-. Commit all changes, and push to GitHub.
-
-  $ git push
-
-=== {counter:directions}. Verify the Configuration
-
-To verify if you have configured the repository correctly, open https://travis-ci.org and verify that Travis starts, and subsequently finishes processing the job.
-
-Travis should place the built site into the _gh-pages_ branch upon completion.
-
-== Summary
-
-If you can load the `[username].github.io/jekyll-asciidoc-quickstart` home page, you have successfully completed basic configuration.
-
+If you can load the URL at `\https://github-username.github.io/name-of-repository`, then you have successfully completed the basic configuration.
 Start writing blog posts and enjoy the AsciiDoc difference, regardless of what device you choose: computer, tablet, or mobile.
 
-If would you like to work offline first, consider to check your `Gemfile` for the versions of your gem sources. As the case may be, your `jekyll serve` will fail. So make sure to check your gem sources with `gem list --local | grep "jekyll"`.
+== Run your Website Locally
 
-= Details
+You must install some software to build and serve your website locally.
+The requirements on the http://jekyllrb.com/docs/installation/[Jekyll Installation] page describe how to install both Ruby and RubyGems.
+
+If you would like to work offline first, consider checking your `Gemfile` for the versions of your gem sources.
+If the `jekyll serve` command fails, it likely means you don't have the necessary gems installed
+You can check whether the `jekyll` gem is installed locally by running `gem list --local | grep "jekyll"`.
 
 == GitHub Pages and AsciiDoc
 
-GitHub Pages does not (yet) whitelist the jekyll-asciidoc plug-in, so you can not write `.adoc` posts and have them instantly publish like Markdown posts do.
-
-Unlike some "fork and write" repositories that exist for Markdown blogs, you need to initially configure this repository fork with a computer to publish using AsciiDoc.
-
-=== How We Work Around The Limitation
-
-For this repository, the https://travis-ci.org/[Travis CI] Continuous Integration (CI) server emulates GitHub Pages staging automation, and pushes your blog live upon committing any change to the repository.
-
-After initially configuring the repository, you can use Git command-line on your computer, or even a Git client on your tablet or smartphone to write, commit, and automatically publish blog posts.
+GitHub Pages does not (yet) whitelist the jekyll-asciidoc plug-in, so you can not write `.adoc` posts and have them instantly published like Markdown posts do.
+However, the only additional thing we need is the link:.github/workflows/publish.yml[publish.yml] workflow which is already configured in this repository.
+You don't have to change it, unless you want to perform some customization in the build/publish process.
 
 === Help Get AsciiDoc Whitelisted for GitHub Pages
 
 You can help change the lack of native AsciiDoc support by creating a support case through http://github.com/support.
+This way, we won't need a GitHub Action workflow anymore to publish AsciiDoc websites.
 
 Tell the GitHub team that you want the choice to write in AsciiDoc, and have it handled the same way Markdown is when pushed to your GitHub Page.
 
@@ -116,5 +54,7 @@ Your voice counts: make it heard!
 
 The repository requires the following structure to work correctly:
 
-* **master**, for markup sources and configuration. This branch can be named anything you choose, however **master** is a general standard used in Jekyll blogs.
-* **gh-pages**, for the generated static content produced by Travis CI. This branch is the username.github.io GitHub Pages domain, which is created automatically for you when the Travis CI job runs.
+* **main** or **master** (legacy), for markup sources and configuration.
+This branch can be named anything you choose, however **main** is a general standard used in Jekyll blogs.
+* **gh-pages**, for the generated static content hosted on GitHub Pages.
+This branch is the username.github.io GitHub Pages domain, which is automatically created and updated for you when the GitHub Actions workflow runs.
