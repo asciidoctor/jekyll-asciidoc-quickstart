@@ -17,4 +17,5 @@ jobs:
     # Standard usage
     - uses: helaili/jekyll-action@v2
       with:
+        pre_build_commands: gem update --system
         token: ${{ secrets.GITHUB_TOKEN }}
