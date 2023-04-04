@@ -14,7 +14,7 @@ The workflow watches for commits on the `master` or `main` branch, automatically
 . Click the Fork button in the upper right corner of GitHub to create your own copy of this repository.
 . After the fork is completed and you're redirected to your own repository copy:
 .. Access the Settings tab, then the Pages menu on the left.
-.. In the source field, select the `gh-pages` branch to be the source of the website files (this branch is where the Jekyll build will place the generated files). 
+.. In the source field, select the `gh-pages` branch to be the source of the website files (this branch is where the Jekyll build will place the generated files).
 .. Finally, click the Save button and return to your respository home.
 
 === Verify the Build/Publish
