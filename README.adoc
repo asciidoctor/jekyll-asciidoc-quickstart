@@ -1,4 +1,3 @@
-:numbered:
 = Jekyll AsciiDoc Quickstart
 ifndef::env-github[:toc:]
 
