@@ -3,16 +3,17 @@ ifndef::env-github[:toc:]
 
 The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub and GitHub Pages with content based in AsciiDoc.
 This project combines the power of AsciiDoc with a beautiful CSS framework and blog-ready template on top of GitHub's existing publishing infrastructure.
+Since it is a repository template, you can create a copy of it to start your website.
 
-This project provides a GitHub Action workflow that republishes your website when changes are pushed to the repository.
+The project provides a GitHub Action workflow that republishes your website when changes are pushed to the repository.
 The workflow watches for commits on the `master` or `main` branch, automatically runs the Jekyll build, and pushes the generated content to the `gh-pages` branch.
 
 == Directions
 
-=== Fork this Repository and Configure GitHub Pages
+=== Use the template and Configure GitHub Pages
 
-. Click the Fork button in the upper right corner of GitHub to create your own copy of this repository.
-. After the fork is completed and you're redirected to your own repository copy:
+. Click the "Use this template" green button in the upper right corner of GitHub to create your own copy of this repository.
+. After the process is completed you're redirected to your own repository copy:
 .. Access the Settings tab, then the Pages menu on the left.
 .. In the source field, select the `gh-pages` branch to be the source of the website files (this branch is where the Jekyll build will place the generated files).
 .. Finally, click the Save button and return to your respository home.
