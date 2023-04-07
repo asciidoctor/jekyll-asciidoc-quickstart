@@ -1,22 +1,26 @@
 = Jekyll AsciiDoc Quickstart
+:experimental:
 ifndef::env-github[:toc:]
 
-The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub and GitHub Pages with content based in AsciiDoc.
-This project combines the power of AsciiDoc with a beautiful CSS framework and blog-ready template on top of GitHub's existing publishing infrastructure.
-Since it is a repository template, you can create a copy of it to start your website.
+The Jekyll AsciiDoc Quickstart project provides a quick way to set up an AsciiDoc-based website using GitHub's publishing infrastructure.
+This project combines the power of AsciiDoc with an elegant CSS foundation and a blog-ready template.
+Since it's a repository template, all you need to do is create a new repository from this repository to create your website.
 
-The project provides a GitHub Action workflow that republishes your website when changes are pushed to the repository.
-The workflow watches for commits on the `master` or `main` branch, automatically runs the Jekyll build, and pushes the generated content to the `gh-pages` branch.
+The project provides a GitHub Actions workflow that publishes your website whenever changes are pushed to the repository.
+The workflow watches for commits on the *main* (or *master* branch), automatically runs the Jekyll build with the AsciiDoc plugin enabled, and pushes the generated content to the *gh-pages* branch, from which it is hosted.
 
-== Directions
+== Create Your Website
 
-=== Use the template and Configure GitHub Pages
+=== Use the Template and Activate GitHub Pages
 
-. Click the "Use this template" green button in the upper right corner of GitHub to create your own copy of this repository.
-. After the process is completed you're redirected to your own repository copy:
-.. Access the Settings tab, then the Pages menu on the left.
-.. In the source field, select the `gh-pages` branch to be the source of the website files (this branch is where the Jekyll build will place the generated files).
-.. Finally, click the Save button and return to your respository home.
+. Click the green btn:[Use this template] button in the upper right corner of GitHub and select *Create a new repository* to create your own copy of this repository.
+** After the process is complete, you'll be directed to your own repository copy.
+. Access the menu:Settings[] tab, then the menu:Pages[] menu on the left.
+. In the *Source* field, select the btn:[Deploy from a branch] button.
+. In the *Branch* field, select the *gh-pages* branch to be the source of the website files.
+** This branch is where the GitHub Actions workflow that runs the Jekyll build will place the generated files.
+. Finally, click the btn:[Save] button to apply the changes.
+. You may also want to tick the *Enforce HTTPS* option to only serve the site over HTTPS.
 
 === Verify the Build/Publish
 
@@ -55,7 +59,7 @@ Your voice counts: make it heard!
 
 The repository requires the following structure to work correctly:
 
-* **main** or **master** (legacy), for markup sources and configuration.
-This branch can be named anything you choose, however **main** is a general standard used in Jekyll blogs.
-* **gh-pages**, for the generated static content hosted on GitHub Pages.
+* *main* or *master* (legacy), for markup sources and configuration.
+This branch can be named anything you choose, however *main* is a general standard used in Jekyll blogs.
+* *gh-pages*, for the generated static content hosted on GitHub Pages.
 This branch is the username.github.io GitHub Pages domain, which is automatically created and updated for you when the GitHub Actions workflow runs.
