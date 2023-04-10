@@ -2,12 +2,22 @@
 :experimental:
 ifndef::env-github[:toc:]
 
+ifdef::env-github[]
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
 The Jekyll AsciiDoc Quickstart project provides a quick way to set up an AsciiDoc-based website using GitHub's publishing infrastructure.
 This project combines the power of AsciiDoc with an elegant CSS foundation and a blog-ready template.
 Since it's a repository template, all you need to do is create a new repository from this repository to create your website.
 
 The project provides a GitHub Actions workflow that publishes your website whenever changes are pushed to the repository.
 The workflow watches for commits on the *main* (or *master* branch), automatically runs the Jekyll build with the AsciiDoc plugin enabled, and pushes the generated content to the *gh-pages* branch, from which it is hosted.
+
+TIP: You can check a live website created from this repository at https://asciidoctor.github.io/jekyll-asciidoc-quickstart
 
 == Create Your Website
 
