@@ -15,4 +15,5 @@ asciidoctor:
   attributes:
     icons: font
     idseparator: _
+    stylesdir: css
     source-highlighter: coderay
