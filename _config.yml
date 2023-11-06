@@ -13,6 +13,6 @@ asciidoctor:
   base_dir: :docdir
   safe: unsafe
   attributes:
-  - icons=font
-  - idseparator=_
-  - source-highlighter=coderay
+    icons: font
+    idseparator: _
+    source-highlighter: coderay
