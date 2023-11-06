@@ -36,7 +36,7 @@ Start writing blog posts and enjoy the AsciiDoc difference, regardless of what d
 == Run your Website Locally
 
 You must install some software to build and serve your website locally.
-The requirements on the http://jekyllrb.com/docs/installation/[Jekyll Installation] page describe how to install both Ruby and RubyGems.
+The requirements on the https://jekyllrb.com/docs/installation/[Jekyll Installation] page describe how to install both Ruby and RubyGems.
 
 If you would like to work offline first, consider checking your `Gemfile` for the versions of your gem sources.
 If the `jekyll serve` command fails, it likely means you don't have the necessary gems installed
@@ -50,7 +50,7 @@ You don't have to change it, unless you want to perform some customization in th
 
 === Help Get AsciiDoc Whitelisted for GitHub Pages
 
-You can help change the lack of native AsciiDoc support by creating a support case through http://github.com/support.
+You can help change the lack of native AsciiDoc support by creating a support case through https://github.com/support.
 This way, we won't need a GitHub Action workflow anymore to publish AsciiDoc websites.
 
 Tell the GitHub team that you want the choice to write in AsciiDoc, and have it handled the same way Markdown is when pushed to your GitHub Page.
