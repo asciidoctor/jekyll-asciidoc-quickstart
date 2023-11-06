@@ -28,14 +28,14 @@ To display a list of posts, use Jekyll syntax similar to the following:
 
 === Update Look and feel
 
-The layout provided with the https://github.com/asciidoctor/jekyll-asciidoc-quickstart[Jekyll AsciiDoc Quickstart] project is based on http://foundation.zurb.com[Foundation], a responsive design css framework. You're free to update the layout by editing the `_layouts/default.html` file and css under the `css` directory.
+The layout provided with the https://github.com/asciidoctor/jekyll-asciidoc-quickstart[Jekyll AsciiDoc Quickstart] project is based on https://foundation.zurb.com[Foundation], a responsive design css framework. You're free to update the layout by editing the `_layouts/default.html` file and css under the `css` directory.
 
-//This blog layout is based on the http://foundation.zurb.com/templates-previews-sites-f6/blog.html[Blog template].
+//This blog layout is based on the https://foundation.zurb.com/templates-previews-sites-f6/blog.html[Blog template].
 
 === Reference documentation
 
 The following links will help with detailed explanations on Jekyll and AsciiDoc.
 
-* http://jekyllrb.com[Jekyll]
-* http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[AsciiDoc Quick Reference]
-* http://asciidoctor.org[Asciidoctor]
+* https://jekyllrb.com[Jekyll]
+* https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/[AsciiDoc Quick Reference]
+* https://asciidoctor.org[Asciidoctor]
