@@ -18,4 +18,5 @@ jobs:
       with:
         pre_build_commands: |
           sed -i "s/^#baseurl: .*/baseurl: \/${{ github.event.repository.name }}/" _config.yml
+          gem update --system
         token: ${{ secrets.GITHUB_TOKEN }}
