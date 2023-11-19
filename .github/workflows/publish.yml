@@ -16,4 +16,6 @@ jobs:
     # Standard usage
     - uses: helaili/jekyll-action@v2
       with:
+        pre_build_commands: |
+          sed -i "s/^#baseurl: .*/baseurl: \/${{ github.event.repository.name }}/" _config.yml
         token: ${{ secrets.GITHUB_TOKEN }}
