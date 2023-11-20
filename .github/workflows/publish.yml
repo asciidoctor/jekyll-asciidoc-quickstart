@@ -22,11 +22,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Setup Pages
+    - name: Configure Pages
       id: pages
       uses: actions/configure-pages@v3
-      with:
-        enablement: true
     - name: Install Ruby and Jekyll
       uses: ruby/setup-ruby@v1
       with:
