@@ -32,7 +32,7 @@ jobs:
       with:
         ruby-version: '3.2'
         bundler-cache: true
-        cache-version: "${{ hashFiles('Gemfile') }}-0" # increment suffix to force gems to be refetched
+        cache-version: 0
     - name: Generate Site
       run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
       env:
