@@ -15,14 +15,13 @@ You can find a live website created from this repository at https://asciidoctor.
 
 === Use the Template and Activate GitHub Pages
 
-. Click the green btn:[Use this template] button in the upper right corner of GitHub and select *Create a new repository* to create your own copy of this repository.
-** After the process is complete, you'll be directed to your own repository copy.
+. Click the green btn:[Use this template] button in the upper right corner of GitHub and select *Create a new repository* to create your own copy of this repository (i.e., fork).
+** After the process is complete, you'll be directed to your fork.
+** The first GitHub Actions workflow will fail since GitHub Pages is not yet enabled in your fork.
 . Access the menu:Settings[] tab, then the menu:Pages[] menu on the left.
-. In the *Source* field, select the btn:[Deploy from a branch] button.
-. In the *Branch* field, select the *gh-pages* branch to be the source of the website files.
-** This branch is where the GitHub Actions workflow that runs the Jekyll build will place the generated files.
-. Finally, click the btn:[Save] button to apply the changes.
-. You may also want to tick the *Enforce HTTPS* option to only serve the site over HTTPS.
+. In the *Source* field, select the btn:[Github Actions] option.
+. Click the btn:[Save] button to apply the changes.
+. Navigate to menu:Actions[] tab, click "Publish to GitHub Pages", click btn:[Run Workflow], then click btn:[Run workflow].
 
 === Verify the Build/Publish
 
@@ -63,5 +62,4 @@ The repository requires the following structure to work correctly:
 
 * *main* or *master* (legacy), for markup sources and configuration.
 This branch can be named anything you choose, however *main* is a general standard used in Jekyll blogs.
-* *gh-pages*, for the generated static content hosted on GitHub Pages.
-This branch is the username.github.io GitHub Pages domain, which is automatically created and updated for you when the GitHub Actions workflow runs.
+* _.github/workflows/publish.yml_ GitHub Action workflow to build the site and publish it to GitHub Pages.
