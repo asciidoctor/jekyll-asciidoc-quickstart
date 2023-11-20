@@ -1,3 +1,4 @@
+# see https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml for reference
 name: Publish to GitHub Pages
 on:
   push:
