@@ -7,26 +7,36 @@ on:
 concurrency:
   group: pages
   cancel-in-progress: true
+environment:
+  name: github-pages
+  url: ${{ steps.deployment.outputs.page_url }}
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 jobs:
-  jekyll:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    # Use the GitHub Actions cache to shorten build times and decrease load on servers
-    - uses: actions/cache@v2
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install Ruby and Jekyll
+      uses: ruby/setup-ruby@v1
       with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile') }}
-        restore-keys: ${{ runner.os }}-gems-
-    # Standard usage
-    - uses: helaili/jekyll-action@v2
+        ruby-version: '3.2'
+        bundler-cache: true
+    #- name: Setup Pages
+    #  uses: actions/configure-pages@v3
+    - name: Configure Site
+      run: |
+        sed -i "s/^#baseurl: .*/baseurl: \/${{ github.event.repository.name }}/" _config.yml
+    - name: Generate Site
+      run: bundle exec jekyll build
+    - name: Upload Artifacts
+      uses: actions/upload-pages-artifact@v1
       with:
-        pre_build_commands: |
-          sed -i "s/^#baseurl: .*/baseurl: \/${{ github.event.repository.name }}/" _config.yml
-          gem update --system
-        token: ${{ secrets.GITHUB_TOKEN }}
+        path: _site
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
