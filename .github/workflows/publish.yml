@@ -22,6 +22,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Setup Pages
+      id: pages
       uses: actions/configure-pages@v3
       with:
         enablement: true
@@ -30,11 +31,10 @@ jobs:
       with:
         ruby-version: '3.2'
         bundler-cache: true
-    - name: Configure Site
-      run: |
-        sed -i "s/^#baseurl: .*/baseurl: \/${{ github.event.repository.name }}/" _config.yml
     - name: Generate Site
-      run: bundle exec jekyll build
+      run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+      env:
+        JEKYLL_ENV: production
     - name: Upload Artifacts
       uses: actions/upload-pages-artifact@v1
       with:
