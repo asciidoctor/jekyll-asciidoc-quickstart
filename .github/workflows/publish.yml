@@ -26,8 +26,8 @@ jobs:
       with:
         ruby-version: '3.2'
         bundler-cache: true
-    #- name: Setup Pages
-    #  uses: actions/configure-pages@v3
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
     - name: Configure Site
       run: |
         sed -i "s/^#baseurl: .*/baseurl: \/${{ github.event.repository.name }}/" _config.yml
